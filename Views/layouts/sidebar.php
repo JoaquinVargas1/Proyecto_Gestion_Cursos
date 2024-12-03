@@ -10,25 +10,25 @@
 
                 </span></a>
                 <li  class="">
-                    <a href="../careers/mostrar"><i class="material-icons">school</i><span>Cursos
+                    <a href="../careers/cursos"><i class="material-icons">school</i><span>Cursos
                     </span></a>
                 </li>
 
                 <li  class="">
-                    <a href="../students/mostrar"><i class="material-icons">sentiment_very_satisfied</i><span>Alumnos
+                    <a href="../students/alumnos"><i class="material-icons">sentiment_very_satisfied</i><span>Alumnos
 
                     </span></a>
                 </li>
 
 
                 <li  class="">
-                    <a href="../teachers/mostrar"><i class="material-icons">psychology</i><span>Docentes
+                    <a href="../teachers/profesores"><i class="material-icons">psychology</i><span>Profesores
 
                     </span></a>
                 </li>
 
                 <li  class="">
-                    <a href="../subgrade/mostrar"><i class="material-icons">dynamic_feed</i><span>Categorías 
+                    <a href="../subgrade/categorias"><i class="material-icons">dynamic_feed</i><span>Categorías 
 
                     </span></a>
                 </li>        
