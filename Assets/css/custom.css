@@ -2,7 +2,6 @@ body,html{
 	line-height:1.8;
 	font-family:'Poppins',sans-serif;
 	color:#555e58;
-	text-transform:capitalize;
 	font-weight:400;
 	margin:0px;
 	padding:0px;
@@ -59,9 +58,9 @@ body,html{
   
   
   
-  h1,h2,h3,h4,h5,h6,.h1,.21,.h3,.h4{
+  h1,h2,h3,h4,h5,h6,.h1,.h3,.h4{
 	   font-weight:400;
-	   line-height;1.5em;
+	   line-height:1.5em;
   }
   
   p{
@@ -537,10 +536,6 @@ background-color:rgba(0,0,0,0.09);
 			width:60px;
 		}
 		
-		table.table tr th:last-child{
-			width:100px;
-		}
-		
 	   table.table-stripped tbody tr:nth-of-type(odd){
 		   background-color:#fcfcfc;
 	   }
@@ -555,11 +550,6 @@ background-color:rgba(0,0,0,0.09);
 		   cursor:pointer;
 	   }
 	   
-	   table.table td:last-child{
-		   opacity:0.9;
-		   font-size:22px;
-		   margin:0px 5px;
-	   }
 	   
 	   table.table td a{
 		   font-weight:bold;

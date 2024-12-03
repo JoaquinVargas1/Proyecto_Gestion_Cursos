@@ -67,10 +67,10 @@
                     <!-- Ejemplo de fila de alumno -->
                     <tr>
                       <td>1</td>
-                      <td>Juan</td>
-                      <td>Pérez</td>
-                      <td>juan.perez@example.com</td>
-                      <td>5to</td>
+                      <td>Joaquín Manuel</td>
+                      <td>Vargas Hernández</td>
+                      <td>jvargas_15@alu.uabcs.mx</td>
+                      <td>7mo</td>
                       <td>
                         <div class="d-flex justify-content-start">
                           <a href="#deleteAlumnoModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
