@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema Escolar</title>
-    <link href="../Assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../Assets/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet">
-    <link href="../Assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../Assets/css/style.css" rel="stylesheet">
-    <link rel="icon" type="image/png" sizes="96x96" href="../Assets/img/logo.png">
+    <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Assets/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet">
+    <link href="Assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="Assets/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="96x96" href="Assets/img/logo.png">
   </head>
   <body>
     <div class="login-background">
@@ -40,7 +40,7 @@
                   </div>
                 </div>
                 <div class="login-panel-section">
-                  <button type="submit" name="login" class="btn btn-login"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Iniciar sesión</button>
+                  <button type="submit" name="login" class="btn btn-login" ><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Iniciar sesión</button>
                 </div>
               </form>
             </div>
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <script src="../Assets/js/jquery.min.js"></script>
-    <script src="../Assets/js/bootstrap.min.js"></script>
+    <script src="Assets/js/jquery.min.js"></script>
+    <script src="Assets/js/bootstrap.min.js"></script>
   </body>
 </html>

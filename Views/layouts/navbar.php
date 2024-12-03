@@ -27,7 +27,7 @@
                                     <li class="nav-item dropdown">
                                       <a class="nav-link" href="#" data-toggle="dropdown">
                                         <li>
-                                            <a href="../pages-logout.php">
+                                            <a href="../login">
                                               <span class="material-icons" style="font-size: 1rem;">logout</span>
                                               <span style="font-size: 1.3rem;">Logout</span>
                                             </a>

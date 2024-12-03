@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Cursos | Sistema Escolar</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../Assets/css/bootstrap-1.min.css">
+    <link rel="stylesheet" href="../Assets/css/bootstrap-1.min.css">
     <!----css3---->
-    <link rel="stylesheet" href="../../Assets/css/custom.css">
+    <link rel="stylesheet" href="../Assets/css/custom.css">
     <link rel="icon" type="image/png" sizes="96x96" href="../../Assets/img/logo.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
     <!-- Google Material Icon -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="../../Assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../Assets/css/font-awesome.min.css" rel="stylesheet" />
   </head>
   <body>
     <div class="wrapper">
@@ -73,7 +73,7 @@
                       <td>Ciencias</td>
                       <td>
                         <div class="d-flex justify-content-start">
-                          <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../careers/detalle_curso';">Ver</a>
+                          <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../cursos/detalle_curso';">Ver</a>
                           <a href="#editCursoModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
                           <a href="#deleteCursoModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
                         </div>
@@ -159,13 +159,13 @@
         </div>
 
         <!-- Scripts -->
-        <script src="../../Assets/js/jquery-3.3.1.slim.min.js"></script>
-        <script src="../../Assets/js/popper.min.js"></script>
-        <script src="../../Assets/js/bootstrap-1.min.js"></script>
-        <script src="../../Assets/js/jquery-3.3.1.min.js"></script>
+        <script src="../Assets/js/jquery-3.3.1.slim.min.js"></script>
+        <script src="../Assets/js/popper.min.js"></script>
+        <script src="../Assets/js/bootstrap-1.min.js"></script>
+        <script src="../Assets/js/jquery-3.3.1.min.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-        <script src="../../Assets/js/periodo.js"></script>
+        <script src="../Assets/js/periodo.js"></script>
         <script type="text/javascript">
           $(document).ready(function() {
             $(".xp-menubar").on('click', function() {

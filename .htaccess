@@ -1,13 +1,20 @@
-Options -Indexes
-
-
-<IfModule mod_rewrite.c>
-# Activar RewriteEngine
+Options +FollowSymLinks -MultiViews -Indexes
 RewriteEngine on
-RewriteBase /Proyecto_Gestion_Cursos/
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-f
- 
-RewriteRule ^(.*)$ $1.php
+# RewriteBase /
 
-</IfModule>
+#páginas
+RewriteRule ^login/?$ Views/login.php
+
+RewriteRule ^cursos/mostrar/?$ Views/cursos/mostrar.php
+RewriteRule ^cursos/detalle_curso/?$ Views/cursos/detalle_curso.php
+RewriteRule ^cursos/alumnos_inscritos/?$ Views/cursos/alumnos_inscritos.php
+
+RewriteRule ^alumnos/mostrar/?$ Views/alumnos/mostrar.php
+RewriteRule ^alumnos/detalle_alumno/?$ Views/alumnos/detalle_alumno.php
+
+RewriteRule ^profesores/mostrar/?$ Views/profesores/mostrar.php
+
+RewriteRule ^categorias/mostrar/?$ Views/categorias/mostrar.php
+
+#RewriteCond %{REQUEST_URI} ^\/404/$
+#RewriteRule ^(.*)$ /views/errors/404.php [L]
