@@ -1,6 +1,7 @@
 <?php
   require '../../App/Config.php';
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
-    <title>Profesor | Sistema Escolar</title>
+    <title>Detalle de Categoría | Sistema Escolar</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../Assets/css/bootstrap-1.min.css">
     <!----css3---->
@@ -37,39 +38,37 @@
         <div class="main-content">
           <div class="row">
             <div class="col-md-12">
-              <!-- Información del Profesor -->
+              <!-- Información de la Categoría -->
                 <div class="table-title">
                   <div class="row">
                     <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-                      <h2 class="ml-lg-2">Detalle Del Profesor</h2>
+                      <h2 class="ml-lg-2">Detalle de la Categoría</h2>
                     </div>
                   </div>
                 </div>
 
                 <div class="row mb-4">
                   <div class="col-md-12">
-                    <!-- Tarjeta de información del profesor -->
+                    <!-- Tarjeta de información de la categoría -->
                     <div class="card">
                       <div class="card-body">
                         <ul class="list-unstyled">
-                          <li><strong>ID:</strong> 12</li>
-                          <li><strong>Nombre:</strong> Jonathan Giovanni</li>
-                          <li><strong>Apellido:</strong> Soto Muñoz</li>
-                          <li><strong>Email:</strong> jsoto@uabcs.mx</li>
+                          <li><strong>ID:</strong> 1</li>
+                          <li><strong>Nombre:</strong> Tecnología</li>
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <h5 class="mb-3">Cursos que Imparte</h5>
+                <h5 class="mb-3">Cursos en esta Categoría</h5>
                 <table class="table table-bordered table-striped table-hover" id="coursesTable">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Curso</th>
                             <th>Descripción</th>
-                            <th>Categoría</th>
+                            <th>Profesor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,7 +76,7 @@
                             <td>1</td>
                             <td>Introducción a la Programación</td>
                             <td>Conceptos básicos de programación y lógica.</td>
-                            <td>Tecnología</td>
+                            <td>Jonathan Giovanni Soto Muñoz</td>
                         </tr>
                     </tbody>
                 </table>

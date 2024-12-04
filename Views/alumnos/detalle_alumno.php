@@ -1,3 +1,7 @@
+<?php
+  require '../../App/Config.php';
+?>
+
 <!doctype html>
 <html lang="en">
   <head>

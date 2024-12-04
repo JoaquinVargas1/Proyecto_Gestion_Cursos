@@ -121,6 +121,27 @@
         </div>
 
 
+        <!-- Modal para Eliminar AlumnoAlumno -->
+        <div id="deleteAlumnoModal" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Eliminar Alumno</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este Alumno?</p>
+                <p class="text-warning"><small>Esta acción no se puede deshacer.</small></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <!-- Scripts -->
         <script src="../Assets/js/jquery-3.3.1.slim.min.js"></script>
         <script src="../Assets/js/popper.min.js"></script>

@@ -17,6 +17,7 @@ RewriteRule ^profesores/detalle_profesor/?$ Views/profesores/detalle_profesor.ph
 
 
 RewriteRule ^categorias/mostrar/?$ Views/categorias/mostrar.php
+RewriteRule ^categorias/detalle_categoria/?$ Views/categorias/detalle_categoria.php
 
 #RewriteCond %{REQUEST_URI} ^\/404/$
 #RewriteRule ^(.*)$ /views/errors/404.php [L]

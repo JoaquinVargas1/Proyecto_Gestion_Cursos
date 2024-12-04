@@ -38,46 +38,59 @@
         <div class="main-content">
           <div class="row">
             <div class="col-md-12">
-                    <div class="table-wrapper">
-                        <div class="table-title">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <h2 class="mb-4">Detalles del Curso: <span id="nombreCurso">Matemáticas Avanzadas</span></h2>
-                                </div>
-                                <!-- Lista de Alumnos Inscritos -->
-                                <div class="col-lg-4">
-                                    <a href="../cursos/alumnos_inscritos" class="btn btn-success">Ver Lista de Alumnos Inscritos</a>
-                                </div>
-                            </div>         
-                        </div>
-                    </div>
-
-
-
-              <!-- Información del Curso -->
-              <div class="col-lg-8">
-                <div class="card mb-4">
-                  <div class="card-body">
-                    <h4>Descripción</h4>
-                    <p id="descripcionCurso">Curso avanzado de matemáticas aplicadas</p>
-                    <h4>Docente</h4>
-                    <p id="docenteCurso">Arturo Villegas</p>
-                    <h4>Categoría</h4>
-                    <p id="categoriaCurso">Ciencias</p>
+              <div class="table-wrapper">
+                  <div class="table-title">
+                      <div class="row">
+                          <div class="col-lg-8">
+                              <h2 class="mb-4">Detalles del Curso</h2>
+                          </div>
+                          <!-- Lista de Alumnos Inscritos -->
+                          <div class="col-lg-4">
+                              <a href="../cursos/alumnos_inscritos" class="btn btn-success">Ver Lista de Alumnos Inscritos</a>
+                          </div>
+                      </div>         
                   </div>
-                </div>
-                <div class="card">
-                  <div class="card-body">
-                    <h4>Unidades y Contenido</h4>
-                    <ul id="unidadesContenido">
-                      <li>Unidad 1: Álgebra avanzada</li>
-                      <li>Unidad 2: Cálculo diferencial</li>
-                      <li>Unidad 3: Teoría de números</li>
-                      <li>Unidad 4: Estadística aplicada</li>
-                    </ul>
+              </div>
+
+
+
+              <!-- Tarjeta de Información del Curso -->
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="mb-3">
+                    <h5>Nombre</h5>
+                    <p id="descripcionCurso" class="text-muted">Matemáticas aplicadas</p>
+                  </div>
+                  <div class="mb-3">
+                    <h5>Descripción</h5>
+                    <p id="descripcionCurso" class="text-muted">Curso avanzado de matemáticas aplicadas</p>
+                  </div>
+                  <div class="mb-3">
+                    <h5>Docente</h5>
+                    <p id="docenteCurso" class="text-muted">Arturo Villegas</p>
+                  </div>
+                  <div>
+                    <h5>Categoría</h5>
+                    <p id="categoriaCurso" class="text-muted">Ciencias</p>
                   </div>
                 </div>
               </div>
+
+
+              <!-- Tarjeta de Unidades y Contenido -->
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title text-center">Unidades y Contenido</h3>
+                  <ul id="unidadesContenido" class="list-group list-group-flush">
+                    <li class="list-group-item">Unidad 1: Álgebra avanzada</li>
+                    <li class="list-group-item">Unidad 2: Cálculo diferencial</li>
+                    <li class="list-group-item">Unidad 3: Teoría de números</li>
+                    <li class="list-group-item">Unidad 4: Estadística aplicada</li>
+                  </ul>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>
