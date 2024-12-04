@@ -1,4 +1,7 @@
-<?php require '../App/Config.php'; ?>
+<?php 
+  require '../App/Config.php'; 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,20 +21,20 @@
         <div class="row">
           <div class="col-md-6 col-md-offset-4 col-centered">
             <div class="login-panel text-center">
-              <form method="POST" autocomplete="off" role="form">
+              <form method="POST" autocomplete="off" role="form" onsubmit="return false;">
                 <h1 class="login-panel-title ">Login</h1>
 
                 <div class="login-panel-section">
                   <div class="form-group">
                     <div class="input-group margin-bottom-sm">
                       <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
-                      <input class="form-control" name="usuario"  maxlength="30" required type="text" placeholder="Correo">
+                      <input class="form-control" name="usuario" maxlength="30" placeholder="Correo">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-                      <input class="form-control" name="clave" required type="password" placeholder="Contraseña">
+                      <input class="form-control" name="clave" placeholder="Contraseña">
                     </div>
                   </div>
                   <div class="checkbox checkbox-circle checkbox-success checkbox-small">
@@ -40,7 +43,9 @@
                   </div>
                 </div>
                 <div class="login-panel-section">
-                  <button type="submit" name="login" class="btn btn-login" ><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Iniciar sesión</button>
+                <button type="button" class="btn btn-login" onclick="window.location.href='<?php echo BASE_PATH; ?>cursos/mostrar';">
+                <i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Iniciar sesión
+                </button>
                 </div>
               </form>
             </div>
