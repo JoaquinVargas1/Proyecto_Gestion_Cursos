@@ -13,6 +13,8 @@ RewriteRule ^alumnos/mostrar/?$ Views/alumnos/mostrar.php
 RewriteRule ^alumnos/detalle_alumno/?$ Views/alumnos/detalle_alumno.php
 
 RewriteRule ^profesores/mostrar/?$ Views/profesores/mostrar.php
+RewriteRule ^profesores/detalle_profesor/?$ Views/profesores/detalle_profesor.php
+
 
 RewriteRule ^categorias/mostrar/?$ Views/categorias/mostrar.php
 

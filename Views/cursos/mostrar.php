@@ -52,7 +52,7 @@
                 </div>
 
                 <!-- Tabla de Cursos -->
-                <table id="tablaCursos" class="table table-striped table-hover">
+                <table id="tablaCursos" class="table table-striped table-hover text-center">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -72,7 +72,7 @@
                       <td>Arturo Villegas</td>
                       <td>Ciencias</td>
                       <td>
-                        <div class="d-flex justify-content-start">
+                        <div class="d-flex justify-content-center">
                           <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../cursos/detalle_curso';">Ver</a>
                           <a href="#editCursoModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
                           <a href="#deleteCursoModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
