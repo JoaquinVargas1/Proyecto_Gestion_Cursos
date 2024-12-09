@@ -17,22 +17,22 @@ if (isset($_POST['action'])) {
         case 'addCategory':
             $name = $_POST['name'];
             $categorycontroller = new CategoryController();
-            $profesorcontroller->addProfesor($name, $lastname, $email, $password);
+            $categorycontroller->addCategory($name, $lastname, $email, $password);
             break;
 
 
-        case 'removeProfesor':
+        case 'removeCourse':
             $profesorId = $_POST;
             $categorycontroller = new CategoryController();
-            $profesorcontroller->removeProfesor($profesorId);
+            $categorycontroller->removeCategory($courseId);
             break;
 
 
-        case 'updateProfesor':
+        case 'updateCourse':
             $profesorId = $_POST['userId'];
             $name = $_POST['name'];
             $categorycontroller = new CategoryController();
-            $profesorcontroller->editProfesor($profesorId, $name);
+            $categorycontroller->editCategory($courseId, $name);
             break;
     }
 }
