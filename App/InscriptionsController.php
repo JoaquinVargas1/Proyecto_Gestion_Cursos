@@ -19,14 +19,14 @@ if (isset($_POST['action'])) {
             $date_inscription = $_POST['date_inscription'];
             $user_id = $_POST['user_id'];
             $course_id = $_POST['course_id'];
-            $inscriptioncontroller = new InscriptionController();
+            $inscriptioncontroller = new InscriptionsController();
             $inscriptioncontroller->addInscription($date_inscription, $user_id, $course_id);
             break;
 
 
         case 'removeInscription':
             $profesorId = $_POST;
-            $inscriptioncontroller = new InscriptionController();
+            $inscriptioncontroller = new InscriptionsController();
             $inscriptioncontroller->removeInscription($profesorId);
             break;
 
@@ -37,7 +37,7 @@ if (isset($_POST['action'])) {
             $description = $_POST['description'];
             $category_id = $_POST['category_id'];
             $profesorId = $_POST['profesorId'];
-            $inscriptioncontroller = new InscriptionController();
+            $inscriptioncontroller = new InscriptionsController();
             $inscriptioncontroller->updateInscription($courseId, $name, $description, $category_id, $profesorId);
             break;
     }
@@ -49,7 +49,7 @@ if (isset($_POST['action'])) {
 
 
 
-class InscriptionController
+class InscriptionsController
 {
 
     public function get()
@@ -99,13 +99,13 @@ class InscriptionController
 
 
 
-    public function updateInscription($date_inscription, $user_id, $course_id)
+    public function updateInscription($inscriptionId,$date_inscription, $user_id, $course_id)
     {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/',
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/'.$inscriptionId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

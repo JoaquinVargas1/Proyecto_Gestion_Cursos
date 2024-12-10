@@ -16,29 +16,30 @@ if (isset($_POST['action'])) {
 
 
         case 'addUnit':
-            $date_inscription = $_POST['date_inscription'];
-            $user_id = $_POST['user_id'];
-            $course_id = $_POST['course_id'];
-            $inscriptioncontroller = new InscriptionController();
-            $inscriptioncontroller->addInscription($date_inscription, $user_id, $course_id);
+            $tittle = $_POST['tittle'];
+            $description = $_POST['description'];
+            $content = $_POST['content'];
+            $course_id= $_POST['course_id'];
+            $inscriptioncontroller = new UnitController();
+            $inscriptioncontroller->addUnit($tittle,$description, $content, $course_id);
             break;
 
 
         case 'removeUnit':
-            $profesorId = $_POST;
-            $inscriptioncontroller = new InscriptionController();
-            $inscriptioncontroller->removeInscription($profesorId);
+            $unitId = $_POST;
+            $inscriptioncontroller = new UnitController();
+            $inscriptioncontroller->removeUnit($unitId);
             break;
 
 
         case 'updateUnit':
-            $UnitId = $_POST['courseId'];
-            $name = $_POST['name'];
+            $unitId = $_POST['unit_id'];
+            $tittle = $_POST['tittle'];
             $description = $_POST['description'];
-            $category_id = $_POST['category_id'];
-            $profesorId = $_POST['profesorId'];
-            $inscriptioncontroller = new InscriptionController();
-            $inscriptioncontroller->updateInscription($courseId, $name, $description, $category_id, $profesorId);
+            $content = $_POST['content'];
+            $course_id= $_POST['course_id'];
+            $inscriptioncontroller = new UnitController();
+            $inscriptioncontroller->updateUnit($unitId, $name, $description, $category_id,$courseId);
             break;
     }
 }
@@ -49,7 +50,7 @@ if (isset($_POST['action'])) {
 
 
 
-class InscriptionController
+class UnitController
 {
 
     public function get()
@@ -58,7 +59,7 @@ class InscriptionController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/',
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -74,13 +75,13 @@ class InscriptionController
         echo $response;
     }
 
-    public function addInscription($date_inscription, $user_id, $course_id)
+    public function addUnit($tittle,$description, $content, $course_id)
     {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/',
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/units',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -88,7 +89,7 @@ class InscriptionController
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('date_inscription' => $date_inscription, 'user_id' => $user_id, 'course_id' => $course_id),
+            CURLOPT_POSTFIELDS => array('tittle' => $tittle, 'description' => $description, 'content' => $content,'course_id' => $course_id),
         ));
 
         $response = curl_exec($curl);
@@ -99,13 +100,13 @@ class InscriptionController
 
 
 
-    public function updateInscription($date_inscription, $user_id, $course_id)
+    public function updateUnit($unitId,$tittle,$description, $content, $course_id)
     {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/',
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/units/'.$unitId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -113,7 +114,7 @@ class InscriptionController
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'PUT',
-            CURLOPT_POSTFIELDS => array('date_inscription' => $date_inscription, 'user_id' => $user_id, 'course_id' => $course_id),
+            CURLOPT_POSTFIELDS => array('tittle' => $tittle, 'description' => $description, 'content' => $content,'course_id' => $course_id),
         ));
 
         $response = curl_exec($curl);
@@ -123,13 +124,13 @@ class InscriptionController
     }
 
 
-    public function removeInscription($inscriptionId)
+    public function removeUnit($unitId)
     {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/' . $inscriptionId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/units/' . $unitId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -147,13 +148,13 @@ class InscriptionController
 
 
 
-    public function getInscriptionByID($inscriptionId)
+    public function getUnitByID($unitId)
     {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/' . $inscriptionId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/' . $unitId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -171,52 +172,6 @@ class InscriptionController
 
 
 
-
-    public function getInscriptionByStudent($studentId)
-    {
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/profesors/'.$studentId,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
-    }
-
-
-
-    public function getInscriptionByCourse($courseId)
-    {
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/inscriptions/courses/'.$courseId,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
-    }
 
 
 

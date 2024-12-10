@@ -103,7 +103,7 @@ class StudentsController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students'.$studentsId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students/'.$studentsId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -125,7 +125,7 @@ class StudentsController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students' . $studentsId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students/' . $studentsId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -149,7 +149,7 @@ class StudentsController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students' . $studentsId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students/' . $studentsId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

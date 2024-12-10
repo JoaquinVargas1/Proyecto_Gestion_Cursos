@@ -103,7 +103,7 @@ class ProfesorController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/profesors' . $profesorId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/profesors/' . $profesorId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
