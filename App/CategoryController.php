@@ -17,22 +17,22 @@ if (isset($_POST['action'])) {
         case 'addCategory':
             $name = $_POST['name'];
             $categorycontroller = new CategoryController();
-            $categorycontroller->addCategory($name, $lastname, $email, $password);
+            $categorycontroller->addCategory($name);
             break;
 
 
-        case 'removeCourse':
+        case 'removeCategory':
             $profesorId = $_POST;
             $categorycontroller = new CategoryController();
-            $categorycontroller->removeCategory($courseId);
+            $categorycontroller->removeCategory($categoryId);
             break;
 
 
-        case 'updateCourse':
-            $profesorId = $_POST['userId'];
+        case 'updateCategory':
+            $categoryId = $_POST['categoryId'];
             $name = $_POST['name'];
             $categorycontroller = new CategoryController();
-            $categorycontroller->editCategory($courseId, $name);
+            $categorycontroller->editCategory($categoryId, $name);
             break;
     }
 }
@@ -99,7 +99,7 @@ class CategoryController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/categories' . $categoryId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/categories/' . $categoryId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -123,7 +123,7 @@ class CategoryController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/categories' . $categoryId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/categories/' . $categoryId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -148,7 +148,7 @@ class CategoryController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/categories' . $categoryId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/categories/' . $categoryId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
