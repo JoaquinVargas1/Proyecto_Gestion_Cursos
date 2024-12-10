@@ -1,11 +1,11 @@
-<?php
+<?php 
 require '../../App/Config.php'; 
 require_once '../../App/ProfesorController.php';
 
 // Crear una instancia del controlador de profesores
 $profesorController = new ProfesorController();
 
-// Capturar la salida del método get() ya que éste hace echo directo
+// Obtener la lista de profesores
 ob_start();
 $profesorController->get();
 $json = ob_get_clean();
@@ -37,19 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1">
     <title>Profesores | Sistema Escolar</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../Assets/css/bootstrap-1.min.css">
     <link rel="stylesheet" href="../Assets/css/custom.css">
     <link rel="icon" type="image/png" sizes="96x96" href="../../Assets/img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="../Assets/css/font-awesome.min.css" rel="stylesheet" />
   </head>
   <body>
     <div class="wrapper">
@@ -102,13 +97,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                           <td><?php echo $email; ?></td>
                           <td>
                             <div class="d-flex justify-content-center">
-                              <a href="detalle_profesor.php?id=<?php echo $profesorId; ?>" class="btn btn-info mx-1">Ver</a>
-                              <a href="#editProfesorModal" class="btn btn-primary mx-1" data-toggle="modal"
+                            <a href="../../Views/profesores/detalle_profesor.php?id=<?php echo $profesor['id'] ?? ''; ?>" class="btn btn-info mx-1">Ver</a>
+                            <a href="#editProfesorModal" 
+                                 class="btn btn-primary mx-1" 
+                                 data-toggle="modal"
                                  data-id="<?php echo $profesorId; ?>"
                                  data-name="<?php echo $name; ?>"
                                  data-lastname="<?php echo $lastName; ?>"
                                  data-email="<?php echo $email; ?>">Editar</a>
-                              <a href="#deleteProfesorModal" class="btn btn-danger mx-1" data-toggle="modal"
+                              <a href="#deleteProfesorModal" 
+                                 class="btn btn-danger mx-1" 
+                                 data-toggle="modal"
                                  data-id="<?php echo $profesorId; ?>">Eliminar</a>
                             </div>
                           </td>
@@ -225,32 +224,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
           </div>
         </div>
 
-        <!-- Scripts -->
         <script src="../Assets/js/jquery-3.3.1.slim.min.js"></script>
         <script src="../Assets/js/popper.min.js"></script>
         <script src="../Assets/js/bootstrap-1.min.js"></script>
-        <script src="../Assets/js/jquery-3.3.1.min.js"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script>
           $(document).ready(function() {
-            $(".xp-menubar").on('click', function() {
-              $('#sidebar').toggleClass('active');
-              $('#content').toggleClass('active');
-            });
-            $(".xp-menubar, .body-overlay").on('click', function() {
-              $('#sidebar, .body-overlay').toggleClass('show-nav');
-            });
-
-            // Cuando se hace clic en el botón "Editar"
             $('#editProfesorModal').on('show.bs.modal', function (event) {
-              var button = $(event.relatedTarget); 
+              var button = $(event.relatedTarget);
               $('#edit_profesorId').val(button.data('id'));
               $('#edit_name').val(button.data('name'));
               $('#edit_lastname').val(button.data('lastname'));
               $('#edit_email').val(button.data('email'));
             });
 
-            // Cuando se hace clic en el botón "Eliminar"
             $('#deleteProfesorModal').on('show.bs.modal', function (event) {
               var button = $(event.relatedTarget);
               $('#delete_profesorId').val(button.data('id'));

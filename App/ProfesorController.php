@@ -32,7 +32,7 @@ if (isset($_POST['action'])) {
 
 
         case 'updateProfesor':
-            $profesorId = $_POST['userId'];
+            $profesorId = $_POST['profesorId'];
             $name = $_POST['name'];
             $lastname = $_POST['lastname'];
             $email = $_POST['email'];
