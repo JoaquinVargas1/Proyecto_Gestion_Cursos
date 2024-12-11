@@ -71,7 +71,7 @@ class ProfesorController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+        return $response;
     }
 
     public function addProfesor($name, $lastname, $email, $password)
@@ -123,7 +123,7 @@ class ProfesorController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/profesors'.$studentsId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/profesors/'.$studentsId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

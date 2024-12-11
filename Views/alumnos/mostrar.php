@@ -135,7 +135,7 @@ $students = $studentsData;
                           <td><?php echo $semester; ?></td>
                           <td>
                             <div class="d-flex justify-content-center">
-                              <a href="detalle_alumno.php?id=<?php echo $studentId; ?>" class="btn btn-info mx-1">Ver</a>
+                            <a href="../../Views/alumnos/detalle_alumno.php?id=<?php echo $student['id'] ?? ''; ?>" class="btn btn-info mx-1">Ver</a>
                               <a href="#editAlumnoModal" class="btn btn-primary mx-1" data-toggle="modal"
                                  data-id="<?php echo $studentId; ?>"
                                  data-name="<?php echo $name; ?>"
