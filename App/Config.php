@@ -1,6 +1,6 @@
 <?php
     
-    define('BASE_PATH', 'https://proyecto-gestion-cursos.onrender.com');
+    define('BASE_PATH', 'https://proyectogestioncursos-production.up.railway.app/');
 
 
 ?>
