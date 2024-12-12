@@ -135,7 +135,7 @@ $courses = $coursesData;
                                                 <td><?php echo $categoryName; ?></td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="detalle_curso.php?id=<?php echo $courseId; ?>" class="btn btn-info mx-1">Ver</a>
+                                                        <a href="../../Views/cursos/detalle_curso.php?id=<?php echo $courseId; ?>" class="btn btn-info mx-1">Ver</a>
                                                         <a href="#editCursoModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
                                                         <a href="#deleteCursoModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
                                                     </div>
