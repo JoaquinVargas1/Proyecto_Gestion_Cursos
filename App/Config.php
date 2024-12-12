@@ -1,6 +1,6 @@
 <?php
     
-    define('BASE_PATH', 'http://localhost/');
+    define('BASE_PATH', 'https://proyecto-gestion-cursos.onrender.com');
 
 
 ?>
