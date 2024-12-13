@@ -4,6 +4,7 @@ RewriteEngine on
 
 #páginas
 RewriteRule ^login/?$ Views/login.php
+RewriteRule ^register/?$ Views/register.php
 
 RewriteRule ^cursos/mostrar/?$ Views/cursos/mostrar.php [L]
 RewriteRule ^cursos/detalle_curso/?$ Views/cursos/detalle_curso.php
