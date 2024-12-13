@@ -71,7 +71,8 @@ class InscriptionsController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+      //  echo $response;
+        return json_decode($response, true);
     }
 
     public function addInscription($date_inscription, $user_id, $course_id)
@@ -94,7 +95,8 @@ class InscriptionsController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+     //   echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -119,7 +121,8 @@ class InscriptionsController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+       // echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -142,7 +145,8 @@ class InscriptionsController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+     //   echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -166,7 +170,8 @@ class InscriptionsController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+      //  echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -191,7 +196,8 @@ class InscriptionsController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+       // echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -215,7 +221,8 @@ class InscriptionsController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+      //  echo $response;
+        return json_decode($response, true);
     }
 
 

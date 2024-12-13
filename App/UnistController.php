@@ -72,7 +72,8 @@ class UnitController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+       // echo $response;
+        return json_decode($response, true);
     }
 
     public function addUnit($tittle,$description, $content, $course_id)
@@ -95,7 +96,8 @@ class UnitController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+    //    echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -120,7 +122,8 @@ class UnitController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+       // echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -143,7 +146,8 @@ class UnitController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+    //    echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -167,7 +171,8 @@ class UnitController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+      //  echo $response;
+        return json_decode($response, true);
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-
+ require '../App/Config.php'; 
 
 if (isset($_POST['action'])) {
     switch ($_POST['action']) {
@@ -32,7 +32,7 @@ class AuthController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students/login',
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/usuarios/login',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -62,19 +62,19 @@ class AuthController
                 session_start();        
 
                 //lo cambian al index
-                header('Location: dashboard.php'); 
+                header('Location: ' . BASE_PATH . '/alumnos/mostrar');
                 exit;
             case 404:
             
-                header('Location: login.php?error=Usuario no encontrado');
+                header('Location: ' . BASE_PATH . '/login?error=usuario_no_encontrado');
                 exit;
             case 401:
                 
-                header('Location: login.php?error=Contraseña incorrecta');
+                header('Location: ' . BASE_PATH . '/login?error=contrasena_incorrecta');
                 exit;
             default:
                
-                header('Location: login.php?error=Error desconocido');
+                header('Location: ' . BASE_PATH . '/login?error=error_desconocido');
                 exit;
 
     }

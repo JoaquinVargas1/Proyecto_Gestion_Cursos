@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Config.php';
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -87,10 +87,25 @@ class UserController
             CURLOPT_POSTFIELDS => array('name' => $name, 'email' => $email, 'password' => $password),
         ));
 
+        
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
-        echo $response;
+       // list($header, $body) = explode("\r\n\r\n", $response, 2);
+        //$responseData = json_decode($body, true);
+        
+        
+        if ($httpCode == 200) {
+
+            $_SESSION['user'] = $email;
+            session_start();        
+            header('Location: ' . BASE_PATH . '/alumnos/mostrar');
+        return json_decode($response, true);}
+        else{
+
+        //    return json_decode($responseData);
+            header('Location: ' . BASE_PATH . '/login?error=error_desconocido');
+        }
     }
 
 

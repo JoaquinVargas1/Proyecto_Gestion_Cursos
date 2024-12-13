@@ -1,4 +1,5 @@
 <?php
+require_once 'Config.php';
 
 if (!isset($_SESSION)) {
     session_start();
@@ -65,7 +66,8 @@ class CategoryController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+      //  echo $response;
+        return json_decode($response, true);
     }
 
     public function addCategory($name)
@@ -86,9 +88,21 @@ class CategoryController
         ));
 
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
-        echo $response;
+       // list($header, $body) = explode("\r\n\r\n", $response, 2);
+        //$responseData = json_decode($body, true);
+        
+        
+        if ($httpCode == 201) {
+        
+            header('Location: ' . BASE_PATH . 'categorias/mostrar');
+        return json_decode($response, true);}
+        else{
+
+        //    return json_decode($responseData);
+            header('Location: ' . BASE_PATH . 'categorias/mostrar?error=error');
+        }
     }
 
 
@@ -111,9 +125,21 @@ class CategoryController
         ));
 
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
-        echo $response;
+       // list($header, $body) = explode("\r\n\r\n", $response, 2);
+        //$responseData = json_decode($body, true);
+        
+        
+        if ($httpCode == 201) {
+        
+            header('Location: ' . BASE_PATH . 'categorias/mostrar');
+        return json_decode($response, true);}
+        else{
+
+        //    return json_decode($responseData);
+            header('Location: ' . BASE_PATH . 'categorias/mostrar?error=error');
+        }
     }
 
 
@@ -136,7 +162,8 @@ class CategoryController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+       // echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -161,6 +188,7 @@ class CategoryController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+       // echo $response;
+        return json_decode($response, true);
     }
 }

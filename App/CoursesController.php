@@ -1,6 +1,6 @@
 
 <?php
-
+require_once 'Config.php';
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -69,10 +69,13 @@ class CoursesController
             CURLOPT_CUSTOMREQUEST => 'GET',
         ));
 
+
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+    
+      
+        return json_decode($response, true);
     }
 
     public function addCourse($name, $description, $category_id, $profesorId)
@@ -93,9 +96,17 @@ class CoursesController
         ));
 
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
-        echo $response;
+
+        if ($httpCode == 201) {
+        
+            header('Location: ' . BASE_PATH . 'cursos/mostrar');
+        return json_decode($response, true);}
+        else{
+
+            header('Location: ' . BASE_PATH . 'cursos/mostrar?error=error');
+        }
     }
 
 
@@ -118,9 +129,17 @@ class CoursesController
         ));
 
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
-        echo $response;
+
+        if ($httpCode == 201) {
+        
+            header('Location: ' . BASE_PATH . 'cursos/mostrar');
+        return json_decode($response, true);}
+        else{
+
+            header('Location: ' . BASE_PATH . 'cursos/mostrar?error=error');
+        }
     }
 
 
@@ -143,7 +162,8 @@ class CoursesController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+
+        return json_decode($response, true);
     }
 
 
@@ -167,7 +187,7 @@ class CoursesController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -191,7 +211,7 @@ class CoursesController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+        return json_decode($response, true);
     }
 
 
@@ -215,6 +235,6 @@ class CoursesController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+        return json_decode($response, true);
     }
 }
