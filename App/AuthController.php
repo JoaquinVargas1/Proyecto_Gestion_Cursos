@@ -54,7 +54,7 @@ class AuthController
         list($header, $body) = explode("\r\n\r\n", $response, 2);
         $responseData = json_decode($body, true);
         
-        session_start();
+        
         switch ($httpCode) {
             case 200:
 
