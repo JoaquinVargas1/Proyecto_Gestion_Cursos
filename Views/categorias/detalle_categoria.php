@@ -1,35 +1,7 @@
 <?php
-require '../../App/Config.php';
-require_once '../../App/CategoryController.php';
-
-// Iniciar sesión si no está iniciada
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-// Obtener el ID de la categoría desde la URL
-$categoryId = $_GET['id'] ?? null;
-
-if (!$categoryId) {
-    die("Error: No se proporcionó un ID de categoría.");
-}
-
-// Crear una instancia del controlador de categorías
-$categoryController = new CategoryController();
-
-// Capturar la salida del método getCategoryByID()
-ob_start();
-$categoryController->getCategoryByID($categoryId);
-$response = ob_get_clean();
-$categoryData = json_decode($response, true);
-
-if (!is_array($categoryData) || empty($categoryData)) {
-    die("Error: No se pudo obtener la información de la categoría.");
-}
-
-// Obtener la información de los cursos asociados a la categoría
-$courses = $categoryData['courses'] ?? [];
+  require '../../App/Config.php';
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -67,55 +39,47 @@ $courses = $categoryData['courses'] ?? [];
           <div class="row">
             <div class="col-md-12">
               <!-- Información de la Categoría -->
-              <div class="table-title">
-                <div class="row">
-                  <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-                    <h2 class="ml-lg-2">Detalle de la Categoría</h2>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mb-4">
-                <div class="col-md-12">
-                  <!-- Tarjeta de información de la categoría -->
-                  <div class="card">
-                    <div class="card-body">
-                      <ul class="list-unstyled">
-                        <li><strong>ID:</strong> <?php echo $categoryData['id'] ?? 'N/A'; ?></li>
-                        <li><strong>Nombre:</strong> <?php echo $categoryData['name'] ?? 'N/A'; ?></li>
-                      </ul>
+                <div class="table-title">
+                  <div class="row">
+                    <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
+                      <h2 class="ml-lg-2">Detalle de la Categoría</h2>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <h5 class="mb-3">Cursos en esta Categoría</h5>
-              <table class="table table-bordered table-striped table-hover" id="coursesTable">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Curso</th>
-                    <th>Descripción</th>
-                    <th>Profesor</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php if (!empty($courses)): ?>
-                    <?php foreach ($courses as $course): ?>
-                      <tr>
-                        <td><?php echo $course['id'] ?? ''; ?></td>
-                        <td><?php echo $course['name'] ?? ''; ?></td>
-                        <td><?php echo $course['description'] ?? ''; ?></td>
-                        <td><?php echo $course['professor'] ?? 'N/A'; ?></td>
-                      </tr>
-                    <?php endforeach; ?>
-                  <?php else: ?>
-                    <tr>
-                      <td colspan="4">No hay cursos disponibles en esta categoría.</td>
-                    </tr>
-                  <?php endif; ?>
-                </tbody>
-              </table>
+                <div class="row mb-4">
+                  <div class="col-md-12">
+                    <!-- Tarjeta de información de la categoría -->
+                    <div class="card">
+                      <div class="card-body">
+                        <ul class="list-unstyled">
+                          <li><strong>ID:</strong> 1</li>
+                          <li><strong>Nombre:</strong> Tecnología</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <h5 class="mb-3">Cursos en esta Categoría</h5>
+                <table class="table table-bordered table-striped table-hover" id="coursesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Curso</th>
+                            <th>Descripción</th>
+                            <th>Profesor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Introducción a la Programación</td>
+                            <td>Conceptos básicos de programación y lógica.</td>
+                            <td>Jonathan Giovanni Soto Muñoz</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
           </div>
         </div>
