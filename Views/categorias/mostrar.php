@@ -1,7 +1,11 @@
 <?php
   require '../../App/Config.php';
-?>
+  require_once '../../App/CategoryController.php';
+  $categoryController = new CategoryController();
+  $categories = $categoryController->get();
+  ?>
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -51,9 +55,12 @@
                   </thead>
                   <tbody>
                     <!-- Ejemplo de fila de categoría -->
+
+                    <?php if (isset($categories['data']) && is_array($categories['data']) && count($categories['data'])): ?>
+                      <?php foreach ($categories['data'] as $category): ?>
                     <tr>
-                      <td>1</td>
-                      <td>Tecnología</td>
+                    <td><?= $category['id'] ?></td>
+                    <td><?= $category['name'] ?></td>
                       <td>
                         <div class="d-flex justify-content-center">
                         <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../categorias/detalle_categoria';">Ver</a>
@@ -62,6 +69,14 @@
                         </div>
                       </td>
                     </tr>
+
+
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="6">No hay categorias disponibles.</td>
+                    </tr>
+                  <?php endif; ?>
                   </tbody>
                 </table>
               </div>
@@ -78,15 +93,16 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
               <div class="modal-body">
-                <form>
+                <form method="POST" action=<?= BASE_PATH . '/App/CategoryController.php'; ?>>
                   <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" class="form-control" required>
+                    <input type="text" class="form-control" required name="name">
                   </div>
                   <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Guardar</button>
                   </div>
+                  <input type="hidden" name="action" value="addCategory">
                 </form>
               </div>
             </div>

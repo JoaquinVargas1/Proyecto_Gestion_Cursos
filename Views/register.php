@@ -22,7 +22,7 @@
         <div class="row">
           <div class="col-md-6 col-md-offset-4 col-centered">
             <div class="login-panel text-center">
-              <form method="POST" autocomplete="off" role="form" action="register">
+              <form method="POST" autocomplete="off" role="form" action="<?= BASE_PATH . '/App/UserController.php'; ?>">
                 <h1 class="login-panel-title" style="line-height: 1.2;">
                   Registro de<br><span style="font-size: 1.2;">Usuario</span>
                 </h1>
@@ -31,7 +31,7 @@
                   <div class="form-group">
                     <div class="input-group margin-bottom-sm">
                       <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
-                      <input class="form-control" name="nombre" maxlength="50" placeholder="Nombre" required>
+                      <input class="form-control" name="name" maxlength="50" placeholder="Nombre" required>
                     </div>
                   </div>
 
@@ -39,7 +39,7 @@
                   <div class="form-group">
                     <div class="input-group margin-bottom-sm">
                       <span class="input-group-addon"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i></span>
-                      <input class="form-control" type="email" name="correo" maxlength="50" placeholder="Correo" required>
+                      <input class="form-control" type="email" name="email" maxlength="50" placeholder="Correo" required>
                     </div>
                   </div>
 
@@ -47,17 +47,18 @@
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-                      <input class="form-control" type="password" name="clave" placeholder="Contraseña" required>
+                      <input class="form-control" type="password" name="password" placeholder="Contraseña" required>
                     </div>
                   </div>
                 </div>
 
                 <div class="login-panel-section">
-                  <button type="submit" class="btn btn-login">
+                  <button type="submit" class="btn btn-login"   >
+
                     <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Registrarse
                   </button>
                 </div>
-
+                <input type="hidden" name="action" value="addUser">
                 <div class="login-panel-section">
                   <p>¿Ya tienes una cuenta? <a href="login">Inicia sesión</a></p>
                 </div>

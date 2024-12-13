@@ -1,5 +1,8 @@
 <?php
   require '../../App/Config.php';
+  require_once '../../App/ProfesorController.php';
+  $profesorController = new ProfesorController();
+  $profesors = $profesorController->get();
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,12 +59,15 @@
                   </thead>
                   <tbody>
                     <!-- Ejemplo de fila de profesor -->
-                    <tr>
-                      <td>1</td>
-                      <td>Jonathan Giovanni</td>
-                      <td>Soto Muñoz</td>
-                      <td>jsoto@uabcs.mx</td>
-                      <td>
+                    <?php if (isset($profesors['data']) && is_array($profesors['data']) && count($profesors['data'])): ?>
+                    <?php foreach ($profesors['data'] as $profesor): ?>
+                      <tr>
+                        <td><?= $profesor['id'] ?></td>
+                        <td><?= $profesor['name'] ?></td>
+                        <td><?= $profesor['lastName'] ?></td>
+                        <td><?= $profesor['email'] ?></td>
+      
+                        <td>
                         <div class="d-flex justify-content-center">
                           <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../profesores/detalle_profesor';">Ver</a>
                           <a href="#editProfesorModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
@@ -69,6 +75,14 @@
                         </div>
                       </td>
                     </tr>
+
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="6">No hay profesores disponibles.</td>
+                    </tr>
+                  <?php endif; ?>
+
                   </tbody>
                 </table>
               </div>
@@ -85,23 +99,24 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
               <div class="modal-body">
-                <form>
+                <form  method="POST" action="<?= BASE_PATH . '/App/ProfesorController.php'; ?>" >
                   <div class="form-group">
                     <label>Nombres</label>
-                    <input type="text" class="form-control" required>
+                    <input type="text" class="form-control" name="name" required>
                   </div>
                   <div class="form-group">
                     <label>Apellidos</label>
-                    <input type="text" class="form-control" required>
+                    <input type="text" class="form-control" name="lastName" required>
                   </div>
                   <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" required>
+                    <input type="email" class="form-control" name="email" required>
                   </div>
                   <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Guardar</button>
                   </div>
+                  <input type="hidden" name="action" value="addProfesor">
                 </form>
               </div>
             </div>

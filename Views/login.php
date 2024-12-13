@@ -1,5 +1,20 @@
 <?php 
   require '../App/Config.php'; 
+
+  $errorMessage = '';
+if (isset($_GET['error'])) {
+  switch ($_GET['error']) {
+    case 'usuario_no_encontrado':
+      $errorMessage = 'Usuario no encontrado.';
+      break;
+    case 'contrasena_incorrecta':
+      $errorMessage = 'Contraseña incorrecta.';
+      break;
+    case 'error_desconocido':
+      $errorMessage = 'Ha ocurrido un error desconocido.';
+      break;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,28 +37,37 @@
         <div class="row">
           <div class="col-md-6 col-md-offset-4 col-centered">
             <div class="login-panel text-center">
-              <form method="POST" autocomplete="off" role="form" onsubmit="return false;">
+
+            <?php if (!empty($errorMessage)): ?>
+              <div id="error-message" class="alert alert-danger">
+                <?= $errorMessage; ?>
+              </div>
+            <?php endif; ?>
+
+
+            <form method="POST" autocomplete="off" role="form" action="<?= BASE_PATH . '/App/AuthController.php'; ?>">
                 <h1 class="login-panel-title">Login</h1>
 
                 <div class="login-panel-section">
                   <div class="form-group">
                     <div class="input-group margin-bottom-sm">
                       <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
-                      <input class="form-control" name="usuario" maxlength="30" placeholder="Correo">
+                      <input class="form-control" name="email" maxlength="30" placeholder="Correo" type="email" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-                      <input class="form-control" name="clave" placeholder="Contraseña">
+                      <input class="form-control" name="password" placeholder="Contraseña" type="password" require>
                     </div>
                   </div>
                 </div>
                 <div class="login-panel-section">
-                  <button type="button" class="btn btn-login" onclick="window.location.href='<?php echo BASE_PATH; ?>cursos/mostrar';">
+                <button type="submit" class="btn btn-login">
                   <i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Iniciar sesión
-                  </button>
-                </div>
+                </button>
+                <input type="hidden" name="action" value="login">
+              </div>
 
                 <div class="login-panel-section">
                   <p>¿No tienes una cuenta? <a href="register">Regístrate aquí</a></p>
@@ -55,6 +79,20 @@
       </div>
     </div>
 
+
+
+
+    <script>
+    
+    setTimeout(function() {
+      var message = document.getElementById('error-message');
+      if (message) {
+        message.style.transition = "opacity 0.5s";
+        message.style.opacity = "0";
+        setTimeout(() => message.remove(), 500);
+      }
+    }, 3000);
+  </script>
     <script src="Assets/js/jquery.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
   </body>

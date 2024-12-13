@@ -1,5 +1,14 @@
 <?php
   require '../../App/Config.php';
+  require_once '../../App/CategoryController.php';
+  require_once '../../App/ProfesorController.php';
+  require_once '../../App/CoursesController.php';
+  $profesorController = new ProfesorController();
+  $profesors = $profesorController->get();
+  $categoryController = new CategoryController();
+  $categories = $categoryController->get();
+  $coursesController = new CoursesController();
+  $courses = $coursesController->get();
 ?>
 <!doctype html>
 <html lang="en">
@@ -65,12 +74,15 @@
                   </thead>
                   <tbody>
                     <!-- Ejemplo de fila de curso -->
+                    <?php if (isset($courses['data']) && is_array($courses['data']) && count($courses['data'])): ?>
+                    <?php foreach ($courses['data'] as $course): ?>
+                      <tr>
+                        <td><?= $course['id'] ?></td>
+                        <td><?= $course['description'] ?></td>
+                        <td><?= $course['profesorId'] ?></td>
+                        <td><?= $course['category_id'] ?></td>
                     <tr>
-                      <td>1</td>
-                      <td>Matemáticas</td>
-                      <td>Curso avanzado de matemáticas aplicadas</td>
-                      <td>Arturo Villegas</td>
-                      <td>Ciencias</td>
+      
                       <td>
                         <div class="d-flex justify-content-center">
                           <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../cursos/detalle_curso';">Ver</a>
@@ -79,6 +91,14 @@
                         </div>
                       </td>
                     </tr>
+
+
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="6">No hay cursos disponibles.</td>
+                    </tr>
+                  <?php endif; ?>
                   </tbody>
                 </table>
               </div>
