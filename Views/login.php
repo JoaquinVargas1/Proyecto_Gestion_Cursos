@@ -14,6 +14,7 @@
     <link href="Assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="Assets/css/style.css" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="96x96" href="Assets/img/logo.png">
+    <link rel="icon" href="Assets/images/favicon.svg" type="image/x-icon" />
   </head>
   <body>
     <div class="login-background">
@@ -22,7 +23,7 @@
           <div class="col-md-6 col-md-offset-4 col-centered">
             <div class="login-panel text-center">
               <form method="POST" autocomplete="off" role="form" onsubmit="return false;">
-                <h1 class="login-panel-title ">Login</h1>
+                <h1 class="login-panel-title">Login</h1>
 
                 <div class="login-panel-section">
                   <div class="form-group">
@@ -37,15 +38,15 @@
                       <input class="form-control" name="clave" placeholder="Contraseña">
                     </div>
                   </div>
-                  <div class="checkbox checkbox-circle checkbox-success checkbox-small">
-                    <input type="checkbox" id="checkbox1">
-                    <label for="checkbox1">Recuérdame</label>
-                  </div>
                 </div>
                 <div class="login-panel-section">
-                <button type="button" class="btn btn-login" onclick="window.location.href='<?php echo BASE_PATH; ?>cursos/mostrar';">
-                <i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Iniciar sesión
-                </button>
+                  <button type="button" class="btn btn-login" onclick="window.location.href='<?php echo BASE_PATH; ?>cursos/mostrar';">
+                  <i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Iniciar sesión
+                  </button>
+                </div>
+
+                <div class="login-panel-section">
+                  <p>¿No tienes una cuenta? <a href="register">Regístrate aquí</a></p>
                 </div>
               </form>
             </div>

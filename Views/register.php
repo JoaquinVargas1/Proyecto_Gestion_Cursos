@@ -1,6 +1,5 @@
 <?php 
-  require '../Config.php'; 
-  session_start();
+  require '../App/Config.php'; 
 ?>
 
 <!DOCTYPE html>
