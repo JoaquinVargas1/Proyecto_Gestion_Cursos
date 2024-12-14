@@ -95,8 +95,8 @@ class UserController
         
         if ($httpCode == 200) {
 
-            $_SESSION['user'] = $email;
             session_start();        
+            $_SESSION['user'] = $email;
             header('Location: ' . BASE_PATH . '/alumnos/mostrar');
         return json_decode($response, true);}
         else{
@@ -149,7 +149,7 @@ class UserController
 
         $response = curl_exec($curl);
         curl_close($curl);
-        echo $response;
+   //     echo $response;
     }
 
 

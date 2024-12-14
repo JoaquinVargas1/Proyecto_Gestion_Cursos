@@ -1,10 +1,6 @@
 
 <?php
 require_once 'Config.php';
-if (!isset($_SESSION)) {
-    session_start();
-}
-
 
 
 
@@ -20,8 +16,8 @@ if (isset($_POST['action'])) {
             $description = $_POST['description'];
             $category_id = $_POST['category_id'];
             $profesorId = $_POST['profesorId'];
-            $categorycontroller = new CategoryController();
-            $profesorcontroller->addProfesor($name, $description, $category_id, $profesorId);
+            $coursescontroller = new CoursesController();
+            $coursescontroller->addCourse($name, $description, $category_id, $profesorId);
             break;
 
 
@@ -98,6 +94,7 @@ class CoursesController
         $response = curl_exec($curl);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
+    
 
         if ($httpCode == 201) {
         

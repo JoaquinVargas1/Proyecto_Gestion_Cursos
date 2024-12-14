@@ -58,10 +58,10 @@ class AuthController
         switch ($httpCode) {
             case 200:
 
-                $_SESSION['user'] = $email;
                 session_start();        
+                $_SESSION['user'] = $email;
 
-                //lo cambian al index
+                
                 header('Location: ' . BASE_PATH . '/alumnos/mostrar');
                 exit;
             case 404:
