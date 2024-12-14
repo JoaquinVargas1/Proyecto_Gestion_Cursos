@@ -1,5 +1,8 @@
 <?php
- require '../App/Config.php'; 
+ ob_start();
+ require '../App/Config.php';
+ ob_end_clean();
+ 
 
 if (isset($_POST['action'])) {
     switch ($_POST['action']) {
@@ -54,11 +57,14 @@ class AuthController
         list($header, $body) = explode("\r\n\r\n", $response, 2);
         $responseData = json_decode($body, true);
         
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         
         switch ($httpCode) {
             case 200:
 
-                session_start();        
+                    
                 $_SESSION['user'] = $email;
 
                 
@@ -86,7 +92,9 @@ class AuthController
 
     public function logOut()
     {
-        session_unset();
-        session_destroy();
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_unset();
+            session_destroy();
+        }
     }
 }
