@@ -158,27 +158,38 @@ $students = $studentsController->get();
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form>
+              <form method="POST" action="<?= BASE_PATH . '/App/StudentsController.php'; ?>">
                 <div class="form-group">
                   <label>Nombre</label>
-                  <input type="text" class="form-control" required>
+                  <input type="text" class="form-control" required name="name" placeholder="Nombre">
                 </div>
                 <div class="form-group">
                   <label>Apellidos</label>
-                  <input type="text" class="form-control" required>
+                  <input type="text" class="form-control" required name="lastname" placeholder="Apellidos">
                 </div>
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control" required>
+                  <input type="email" class="form-control" required name="email" placeholder="Email">
                 </div>
                 <div class="form-group">
-                  <label>Semestre</label>
-                  <input type="text" class="form-control" required>
+                 <label>Semestre</label>
+                  <select class="form-control" required name="semester">
+                  <option value="PRIMER">PRIMER</option>
+                  <option value="SEGUNDO">SEGUNDO</option>
+                  <option value="TERCER">TERCER</option>
+                  <option value="CUARTO">CUARTO</option>
+                  <option value="QUINTO">QUINTO</option>
+                  <option value="SEXTO">SEXTO</option>
+                  <option value="SETIMO">SETIMO</option>
+                  <option value="OCTAVO">OCTAVO</option>
+                  <option value="NOVENO">NOVENO</option>
+                  </select>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <button type="submit" class="btn btn-primary">Actualizar</button>
                 </div>
+                <input type="hidden" name="action" value="updateStudent">
               </form>
             </div>
           </div>
@@ -200,7 +211,7 @@ $students = $studentsController->get();
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-danger">Eliminar</button>
+              <button onclick="removeStudent(<?=$studentsId?>)" type="button" class="btn btn-danger">Eliminar</button>
             </div>
           </div>
         </div>

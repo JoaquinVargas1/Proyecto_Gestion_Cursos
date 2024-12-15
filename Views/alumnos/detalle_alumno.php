@@ -1,5 +1,9 @@
 <?php
   require '../../App/Config.php';
+  require_once "../../App/StudentsController.php"
+
+  $studentsController = new StudentsController();
+  $students = $studentsController->get();
 ?>
 
 <!doctype html>
