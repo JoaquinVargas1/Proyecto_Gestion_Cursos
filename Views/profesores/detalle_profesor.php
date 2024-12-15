@@ -1,5 +1,21 @@
 <?php
   require '../../App/Config.php';
+  require_once '../../App/ProfesorController.php';
+
+
+  // Verificar si el parámetro 'id' está presente en la URL
+  if (isset($_GET['id'])) {
+    $profesorId = $_GET['id'];
+
+    // Crear una instancia del ProfessorsController
+    $profesorController = new profesorController();
+
+    // Obtener los datos del profesor usando el ID
+    $profesor = $profesorController->getProfesorByID($profesorId);
+  } else {
+    echo "ID de profesor no proporcionado.";
+    exit; // Detener la ejecución si no se encuentra el 'id'
+  }
 ?>
 <!doctype html>
 <html lang="en">
@@ -52,10 +68,9 @@
                     <div class="card">
                       <div class="card-body">
                         <ul class="list-unstyled">
-                          <li><strong>ID:</strong> 12</li>
-                          <li><strong>Nombre:</strong> Jonathan Giovanni</li>
-                          <li><strong>Apellido:</strong> Soto Muñoz</li>
-                          <li><strong>Email:</strong> jsoto@uabcs.mx</li>
+                          <li><strong>ID:</strong> <?= $profesor['id'] ?></li>
+                          <li><strong>Nombre:</strong> <?= $profesor['name'] ?> <?= $profesor['lastName'] ?></li>
+                          <li><strong>Email:</strong> <?= $profesor['email'] ?></li>
                         </ul>
                       </div>
                     </div>
@@ -74,10 +89,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Introducción a la Programación</td>
-                            <td>Conceptos básicos de programación y lógica.</td>
-                            <td>Tecnología</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

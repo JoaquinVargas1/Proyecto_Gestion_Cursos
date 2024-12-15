@@ -167,10 +167,9 @@ class CategoryController
 
     public function getCategoryByID($categoryId)
     {
-
-
+        // Llamar a la API para obtener los cursos de la categoría
         $curl = curl_init();
-
+    
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/categories/' . $categoryId,
             CURLOPT_RETURNTRANSFER => true,
@@ -181,11 +180,26 @@ class CategoryController
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
         ));
-
+    
         $response = curl_exec($curl);
-
         curl_close($curl);
-       // echo $response;
-        return json_decode($response, true);
+    
+        if (!$response) {
+            echo "No se recibió respuesta de la API. La URL podría ser incorrecta o el servidor podría estar caído.";
+            exit;
+        }
+    
+        // Decodificar la respuesta JSON
+        $data = json_decode($response, true);
+    
+        // Verificar si la respuesta contiene la clave 'data'
+        if (isset($data['data'])) {
+            // Si contiene los datos del profesor, devolverlos
+            return $data['data'];
+        } else {
+            // Si no contiene la clave 'data', mostrar un mensaje de error
+            echo "No se encontró el profesor con ID: " . $categoryId;
+            exit;
+        }
     }
 }

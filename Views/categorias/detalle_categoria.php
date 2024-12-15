@@ -1,5 +1,21 @@
 <?php
   require '../../App/Config.php';
+  require_once '../../App/CategoryController.php';
+
+
+  // Verificar si el parámetro 'id' está presente en la URL
+  if (isset($_GET['id'])) {
+    $categoryId = $_GET['id'];
+
+    // Crear una instancia del categoryController
+    $categoryController = new CategoryController();
+
+    // Obtener los datos de la categoria usando el ID
+    $category = $categoryController->getCategoryByID($categoryId);
+  } else {
+    echo "ID de la categoria no proporcionado.";
+    exit; // Detener la ejecución si no se encuentra el 'id'
+  }
 ?>
 
 <!doctype html>
@@ -53,8 +69,8 @@
                     <div class="card">
                       <div class="card-body">
                         <ul class="list-unstyled">
-                          <li><strong>ID:</strong> 1</li>
-                          <li><strong>Nombre:</strong> Tecnología</li>
+                          <li><strong>ID:</strong> <?= $category['id'] ?></li>
+                          <li><strong>Nombre:</strong> <?= $category['name'] ?></li>
                         </ul>
                       </div>
                     </div>
@@ -73,10 +89,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Introducción a la Programación</td>
-                            <td>Conceptos básicos de programación y lógica.</td>
-                            <td>Jonathan Giovanni Soto Muñoz</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

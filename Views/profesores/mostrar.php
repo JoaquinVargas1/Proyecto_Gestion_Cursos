@@ -69,7 +69,7 @@
       
                         <td>
                         <div class="d-flex justify-content-center">
-                          <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../profesores/detalle_profesor';">Ver</a>
+                          <a href="detalle_profesor_id=<?= $profesor['id'] ?>" class="btn btn-info mx-1">Ver</a>
                           <a href="#editProfesorModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
                           <a href="#deleteProfesorModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
                         </div>

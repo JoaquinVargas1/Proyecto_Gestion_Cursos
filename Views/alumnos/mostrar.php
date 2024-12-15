@@ -81,7 +81,7 @@ $students = $studentsController->get();
                         <td><?= $student['semester'] ?></td>
                         <td>
                           <div class="d-flex justify-content-center">
-                            <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../alumnos/detalle_alumno';">Ver</a>
+                            <a href="detalle_alumno_id=<?= $student['id'] ?>" class="btn btn-info mx-1">Ver</a>
                             <a href="#editAlumnoModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
                             <a href="#deleteAlumnoModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
                           </div>

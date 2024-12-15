@@ -6,19 +6,20 @@ RewriteEngine on
 RewriteRule ^login/?$ Views/login.php
 RewriteRule ^register/?$ Views/register.php
 
-RewriteRule ^cursos/mostrar/?$ Views/cursos/mostrar.php [L]
+RewriteRule ^cursos/mostrar/?$ Views/cursos/mostrar.php
 RewriteRule ^cursos/detalle_curso/?$ Views/cursos/detalle_curso.php
 RewriteRule ^cursos/alumnos_inscritos/?$ Views/cursos/alumnos_inscritos.php
 
 RewriteRule ^alumnos/mostrar/?$ Views/alumnos/mostrar.php
-RewriteRule ^alumnos/detalle_alumno/?$ Views/alumnos/detalle_alumno.php
+RewriteRule ^alumnos/detalle_alumno_id=([0-9]+)/?$ Views/alumnos/detalle_alumno.php?id=$1 [L]
 
 RewriteRule ^profesores/mostrar/?$ Views/profesores/mostrar.php
-RewriteRule ^profesores/detalle_profesor/?$ Views/profesores/detalle_profesor.php
-
+RewriteRule ^profesores/detalle_profesor_id=([0-9]+)/?$ Views/profesores/detalle_profesor.php?id=$1 [L]
 
 RewriteRule ^categorias/mostrar/?$ Views/categorias/mostrar.php
-RewriteRule ^categorias/detalle_categoria/?$ Views/categorias/detalle_categoria.php
+RewriteRule ^categorias/detalle_categoria_id=([0-9]+)/?$ Views/categorias/detalle_categoria.php?id=$1 [L]
+
+
 
 #RewriteCond %{REQUEST_URI} ^\/404/$
 #RewriteRule ^(.*)$ /views/errors/404.php [L]

@@ -1,9 +1,20 @@
 <?php
   require '../../App/Config.php';
-  require_once "../../App/StudentsController.php"
+  require_once '../../App/StudentsController.php';
 
-  $studentsController = new StudentsController();
-  $students = $studentsController->get();
+  // Verificar si el parámetro 'id' está presente en la URL
+  if (isset($_GET['id'])) {
+    $studentId = $_GET['id'];
+
+    // Crear una instancia del StudentsController
+    $studentsController = new StudentsController();
+
+    // Obtener los datos del alumno usando el ID
+    $student = $studentsController->getStudentByID($studentId);
+  } else {
+    echo "ID de alumno no proporcionado.";
+    exit; // Detener la ejecución si no se encuentra el 'id'
+  }
 ?>
 
 <!doctype html>
@@ -57,10 +68,10 @@
                     <div class="card">
                       <div class="card-body">
                         <ul class="list-unstyled">
-                          <li><strong>ID:</strong> 1</li>
-                          <li><strong>Nombre:</strong> Joaquín Manuel Vargas Hernández</li>
-                          <li><strong>Email:</strong> jvargas_15@alu.uabcs.mx</li>
-                          <li><strong>Semestre:</strong> 7mo</li>
+                          <li><strong>ID:</strong> <?= $student['id'] ?></li>
+                          <li><strong>Nombre:</strong> <?= $student['name'] ?> <?= $student['lastName'] ?></li>
+                          <li><strong>Email:</strong> <?= $student['email'] ?></li>
+                          <li><strong>Semestre:</strong> <?= $student['semester'] ?></li>
                         </ul>
                       </div>
                     </div>
@@ -78,9 +89,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>7mo</td>
-                            <td>Programacion web Avanzada</td>
-                            <td>Jonathan Soto</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

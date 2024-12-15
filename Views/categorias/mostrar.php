@@ -63,8 +63,8 @@
                     <td><?= $category['name'] ?></td>
                       <td>
                         <div class="d-flex justify-content-center">
-                        <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../categorias/detalle_categoria';">Ver</a>
-                        <a href="#editCategoryModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
+                          <a href="detalle_categoria_id=<?= $category['id'] ?>" class="btn btn-info mx-1">Ver</a>
+                          <a href="#editCategoryModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
                           <a href="#deleteCategoryModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
                         </div>
                       </td>
