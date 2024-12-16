@@ -1,9 +1,8 @@
-
 <?php
 
 ob_start();
 require_once 'Config.php';
-ob_end_clean();
+
 
 
 
@@ -236,5 +235,5 @@ class InscriptionsController
 
 
 }
-
+ob_end_clean();
 ?>

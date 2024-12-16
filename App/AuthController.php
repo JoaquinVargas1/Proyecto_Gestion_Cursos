@@ -1,7 +1,7 @@
 <?php
  ob_start();
  require '../App/Config.php';
- ob_end_clean();
+ 
  
 
 if (isset($_POST['action'])) {
@@ -98,5 +98,5 @@ class AuthController
         }
     }
 }
-
+ob_end_clean();
 ?>

@@ -1,8 +1,6 @@
 <?php
+ob_start();
 require_once 'Config.php';
-
-
-
 
 
 if (isset($_POST['action'])) {
@@ -216,5 +214,5 @@ class CategoryController
         }
     }
 }
-
+ob_end_flush();
 ?>

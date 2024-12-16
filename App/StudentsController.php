@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require_once 'Config.php';
 
 
@@ -229,5 +230,5 @@ class StudentsController
         }
     }
 }
-
+ob_end_flush();
 ?>

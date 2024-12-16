@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require_once 'Config.php';
 
 
@@ -95,7 +96,8 @@ class UserController
         
         if ($httpCode == 200) {
 
-
+            session_start();        
+            $_SESSION['user'] = $email;
             header('Location: ' . BASE_PATH . '/alumnos/mostrar');
         return json_decode($response, true);}
         else{
@@ -174,5 +176,5 @@ class UserController
         echo $response;
     }
 }
-
+ob_end_clean();
 ?>

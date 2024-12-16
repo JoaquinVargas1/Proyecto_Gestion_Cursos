@@ -1,8 +1,6 @@
-
 <?php
+ob_start();
 require_once 'Config.php';
-
-
 
 if (isset($_POST['action'])) {
     switch ($_POST['action']) {
@@ -258,5 +256,5 @@ class CoursesController
         return json_decode($response, true);
     }
 }
-
+ob_end_flush();
 ?>

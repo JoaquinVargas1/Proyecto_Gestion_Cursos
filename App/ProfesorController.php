@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require_once 'Config.php';
 
 
@@ -225,4 +226,5 @@ class ProfesorController
         }
     }
 }
+ob_end_flush();
 ?>
