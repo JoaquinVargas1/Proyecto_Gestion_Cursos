@@ -7,7 +7,7 @@ RewriteRule ^login/?$ Views/login.php
 RewriteRule ^register/?$ Views/register.php
 
 RewriteRule ^cursos/mostrar/?$ Views/cursos/mostrar.php
-RewriteRule ^cursos/detalle_curso/?$ Views/cursos/detalle_curso.php
+RewriteRule ^cursos/detalle_curso_id=([0-9]+)/?$ Views/cursos/detalle_curso.php?id=$1 [L]
 RewriteRule ^cursos/alumnos_inscritos/?$ Views/cursos/alumnos_inscritos.php
 
 RewriteRule ^alumnos/mostrar/?$ Views/alumnos/mostrar.php
