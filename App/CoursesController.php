@@ -258,3 +258,5 @@ class CoursesController
         return json_decode($response, true);
     }
 }
+
+?>

@@ -236,3 +236,5 @@ class InscriptionsController
 
 
 }
+
+?>
