@@ -24,7 +24,7 @@ if (isset($_POST['action'])) {
 
 
         case 'removeStudent':
-            $userId = $_POST;
+            $userId = $_POST['user_id'];
             $studentscontroller = new StudentsController();
             $studentscontroller->removeStudent($userId);
             break;
@@ -33,12 +33,12 @@ if (isset($_POST['action'])) {
         case 'updateStudent':
             $userId = $_POST['userId'];
             $name = $_POST['name'];
-            $lastname = $_POST['lastname'];
+            $lastname = $_POST['lastName'];
             $email = $_POST['email'];
       //      $password = $_POST['password'];
             $semester = $_POST['semester'];
             $studentscontroller = new StudentsController();
-            $studentscontroller->editStudent($studentsId, $name, $lastname, $email, $semester);
+            $studentscontroller->editStudent($userId, $name, $lastname, $email, $semester);
             break;
     }
 }
@@ -113,13 +113,13 @@ class StudentsController
 
 
 
-    public function editStudent($studentsId, $name, $lastname, $email,  $semester)
+    public function editStudent($userId, $name, $lastname, $email,  $semester)
     {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students/'.$studentsId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/students/' . $userId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -127,9 +127,18 @@ class StudentsController
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'PUT',
-            CURLOPT_POSTFIELDS => array('name' => $name, 'lastName' => $lastname, 'email' => $email, 'password' => 'hola123', 'semester' => $semester),
+            CURLOPT_POSTFIELDS => json_encode(array(
+                'name' => $name,
+                'lastName' => $lastname,
+                'email' => $email,
+                'password' => 'hola123',
+                'semester' => $semester
+            )),
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
         ));
-
+        
         $response = curl_exec($curl);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
@@ -137,14 +146,14 @@ class StudentsController
         //$responseData = json_decode($body, true);
         
         
-        if ($httpCode == 201) {
+        if ($httpCode == 200) {
         
-            header('Location: ' . BASE_PATH . 'profesores/mostrar');
+            header('Location: ' . BASE_PATH . 'alumnos/mostrar');
         return json_decode($response, true);}
         else{
 
         //    return json_decode($responseData);
-            header('Location: ' . BASE_PATH . '/profesores/mostrar?error=error');
+            header('Location: ' . BASE_PATH . 'alumnos/mostrar?error=error');
         }
     }
 
@@ -164,10 +173,21 @@ class StudentsController
         ));
 
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
-      //  echo $response;
-        return json_decode($response, true);
+       // list($header, $body) = explode("\r\n\r\n", $response, 2);
+        //$responseData = json_decode($body, true);
+        
+        
+        if ($httpCode == 200) {
+        
+            header('Location: ' . BASE_PATH . 'alumnos/mostrar');
+        return json_decode($response, true);}
+        else{
+
+        //    return json_decode($responseData);
+            header('Location: ' . BASE_PATH . 'alumnos/mostrar?error=error');
+        }
     }
 
 
@@ -198,12 +218,12 @@ class StudentsController
         // Decodificar la respuesta JSON
         $data = json_decode($response, true);
     
-        // Verificar si la respuesta contiene la clave 'data'
+        
         if (isset($data['data'])) {
-            // Si contiene los datos del alumno, devolverlos
+            
             return $data['data'];
         } else {
-            // Si no contiene la clave 'data', mostrar un mensaje de error
+           
             echo "No se encontró el alumno con ID: " . $studentsId;
             exit;
         }

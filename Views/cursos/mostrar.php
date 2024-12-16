@@ -9,6 +9,13 @@ $categoryController = new CategoryController();
 $categories = $categoryController->get();
 $coursesController = new CoursesController();
 $courses = $coursesController->get();
+
+
+
+
+
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -78,24 +85,27 @@ $courses = $coursesController->get();
                   <!-- Ejemplo de fila de curso -->
                   <?php if (isset($courses['data']) && is_array($courses['data']) && count($courses['data'])): ?>
                     <?php foreach ($courses['data'] as $course): ?>
+                      <?php
+                      $profesor = $profesorController->getProfesorByID($course['profesor_id']);
+                      $profesorName = $profesor['name'] ?? 'Desconocido';
+
+                      $category = $categoryController->getCategoryByID($course['category_id']);
+                      $categoryName = $category['name'] ?? 'Desconocido';
+                      ?>
                       <tr>
                         <td><?= $course['id'] ?></td>
                         <td><?= $course['name'] ?></td>
                         <td><?= $course['description'] ?></td>
-                        <td><?= $course['profesor_id'] ?>dsdsd</td>
-                        <td><?= $course['category_id'] ?>dsdsdsds</td>
-                      
-
+                        <td><?= $profesorName ?></td>
+                        <td><?= $categoryName ?></td>
                         <td>
                           <div class="d-flex justify-content-center">
-                            <a href="javascript:void(0);" class="btn btn-info mx-1" onclick="window.location.href='../cursos/detalle_curso';">Ver</a>
-                            <a href="#editCursoModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
-                            <a href="#deleteCursoModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
+                            <a href="detalle_curso_id=<?= $course['id'] ?>" class="btn btn-info mx-1">Ver</a>
+                            <a href="#editCursoModal" class="btn btn-primary mx-1" data-toggle="modal" onclick="fillEditForm(<?= htmlspecialchars(json_encode($course)) ?>)">Editar</a>
+                            <a href="#deleteCursoModal" class="btn btn-danger mx-1" data-toggle="modal" onclick="setCoursetIdToDelete(<?= $course['id'] ?>)">Eliminar</a>
                           </div>
                         </td>
                       </tr>
-
-
                     <?php endforeach; ?>
                   <?php else: ?>
                     <tr>
@@ -103,6 +113,7 @@ $courses = $coursesController->get();
                     </tr>
                   <?php endif; ?>
                 </tbody>
+
               </table>
             </div>
           </div>
@@ -130,7 +141,7 @@ $courses = $coursesController->get();
                 <div class="form-group">
                   <label>Docente</label>
                   <select class="form-control" required name="profesorId">
-                    <option >Seleccione un docente</option>
+                    <option>Seleccione un docente</option>
                     <?php if (isset($profesors['data']) && is_array($profesors['data']) && count($profesors['data'])): ?>
                       <?php foreach ($profesors['data'] as $profesor): ?>
 
@@ -142,15 +153,15 @@ $courses = $coursesController->get();
 
                       <?php endforeach; ?>
                     <?php else: ?>
-                      <option >no hay profesores disponibles </option>
-                        <?php endif; ?>
+                      <option>no hay profesores disponibles </option>
+                    <?php endif; ?>
                   </select>
 
                 </div>
                 <div class="form-group">
                   <label>Categoria</label>
-                  <select class="form-control" required  name="category_id">
-                    <option >Seleccione un categoria</option>
+                  <select class="form-control" required name="category_id">
+                    <option>Seleccione un categoria</option>
                     <?php if (isset($categories['data']) && is_array($categories['data']) && count($categories['data'])): ?>
                       <?php foreach ($categories['data'] as $category): ?>
 
@@ -186,27 +197,62 @@ $courses = $coursesController->get();
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-              <form>
+              <form method="POST" action="<?= BASE_PATH . 'App/CoursesController.php'; ?>">
+                <input type="hidden" name="courseId" id="courseIdToEdit">
                 <div class="form-group">
                   <label>Nombre</label>
-                  <input type="text" class="form-control" required>
+                  <input type="text" class="form-control" required name="name">
                 </div>
                 <div class="form-group">
                   <label>Descripción</label>
-                  <textarea class="form-control" required></textarea>
+                  <textarea class="form-control" required name="description"></textarea>
                 </div>
                 <div class="form-group">
                   <label>Docente</label>
-                  <input type="text" class="form-control" required>
+                  <select class="form-control" required name="profesorId">
+                    <option>Seleccione un docente</option>
+                    <?php if (isset($profesors['data']) && is_array($profesors['data']) && count($profesors['data'])): ?>
+                      <?php foreach ($profesors['data'] as $profesor): ?>
+
+                        <option value="<?= $profesor['id'] ?>"><?= $profesor['name'] ?></option>
+
+
+
+
+
+                      <?php endforeach; ?>
+                    <?php else: ?>
+                      <option>no hay profesores disponibles </option>
+                    <?php endif; ?>
+                  </select>
+
                 </div>
+
+
                 <div class="form-group">
-                  <label>Categoría</label>
-                  <input type="text" class="form-control" required>
+                  <label>Categoria</label>
+                  <select class="form-control" required name="category_id">
+                    <option>Seleccione un categoria</option>
+                    <?php if (isset($categories['data']) && is_array($categories['data']) && count($categories['data'])): ?>
+                      <?php foreach ($categories['data'] as $category): ?>
+
+                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+
+
+                      <?php endforeach; ?>
+                    <?php else: ?>
+                      <tr>
+                        <td colspan="6">No hay Categorias disponibles.</td>
+                      </tr>
+                    <?php endif; ?>
+                  </select>
+
                 </div>
                 <div class="d-flex justify-content-between mt-4">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <button type="submit" class="btn btn-primary">Actualizar</button>
                 </div>
+                <input type="hidden" name="action" value="updateCourse">
               </form>
             </div>
           </div>
@@ -228,7 +274,12 @@ $courses = $coursesController->get();
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-danger">Eliminar</button>
+
+              <form id="deleteCourseForm" method="POST" action="<?= BASE_PATH . '/App/CoursesController.php'; ?>">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <input type="hidden" name="courseId" id="courseIdToDelete">
+                <input type="hidden" name="action" value="removeCourse">
+              </form>
             </div>
           </div>
         </div>
@@ -253,6 +304,30 @@ $courses = $coursesController->get();
             $('#sidebar, .body-overlay').toggleClass('show-nav');
           });
         });
+
+
+
+        function fillEditForm(course) {
+
+          document.getElementById('courseIdToEdit').value = course.id;
+          document.querySelector('#editCursoModal input[name="name"]').value = course.name;
+          document.querySelector('#editCursoModal textarea[name="description"]').value = course.description;
+          const categorySelect = document.querySelector('#editCursoModal select[name="category_id"]');
+          categorySelect.value = course.category_id;
+          const profesorSelect = document.querySelector('#editCursoModal select[name="profesorId"]');
+          profesorSelect.value = course.profesor_id;
+
+
+          console.log('Datos del curso:', course);
+        }
+
+
+
+
+        function setCoursetIdToDelete(courseId) {
+          document.getElementById('courseIdToDelete').value = courseId;
+
+        }
       </script>
     </div>
   </div>

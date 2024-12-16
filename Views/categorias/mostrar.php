@@ -64,8 +64,8 @@
                       <td>
                         <div class="d-flex justify-content-center">
                           <a href="detalle_categoria_id=<?= $category['id'] ?>" class="btn btn-info mx-1">Ver</a>
-                          <a href="#editCategoryModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
-                          <a href="#deleteCategoryModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
+                          <a href="#editCategoryModal" class="btn btn-primary mx-1" data-toggle="modal"   onclick="fillEditForm(<?= htmlspecialchars(json_encode($category)) ?>)">Editar</a>
+                          <a href="#deleteCategoryModal" class="btn btn-danger mx-1" data-toggle="modal"   onclick="setCategoryIdToDelete(<?= $category['id'] ?>)">Eliminar</a>
                         </div>
                       </td>
                     </tr>
@@ -118,15 +118,17 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
               <div class="modal-body">
-                <form>
+                <form  method="POST" action=<?= BASE_PATH . '/App/CategoryController.php'; ?>>
+                <input type="hidden" name="categoryId" id="categoryIdToEdit">
                   <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" class="form-control" required>
+                    <input type="text" class="form-control" required  name="name">
                   </div>
                   <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                   </div>
+                  <input type="hidden" name="action" value="updateCategory">
                 </form>
               </div>
             </div>
@@ -147,7 +149,17 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                
+
+                <form id="deleteStudentForm" method="POST" action="<?= BASE_PATH . '/App/CategoryController.php'; ?>">
+                <input type="hidden" name="category_id" id="categoryIdToDelete">
+                <input type="hidden" name="action" value="removeCategory">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
+                
+              </form>
+
+
+
               </div>
             </div>
           </div>
@@ -168,6 +180,25 @@
               $('#sidebar, .body-overlay').toggleClass('show-nav');
             });
           });
+
+
+
+
+          function fillEditForm(category) {
+
+
+            document.getElementById('categoryIdToEdit').value = category.id;
+            document.querySelector('#editCategoryModal input[name="name"]').value = category.name;
+          }
+
+
+
+          function setCategoryIdToDelete(category_id) {
+          document.getElementById('categoryIdToDelete').value = category_id;
+
+      }
+
+
         </script>
       </div>
     </div>

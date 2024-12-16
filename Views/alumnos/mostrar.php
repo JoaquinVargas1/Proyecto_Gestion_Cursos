@@ -82,8 +82,9 @@ $students = $studentsController->get();
                         <td>
                           <div class="d-flex justify-content-center">
                             <a href="detalle_alumno_id=<?= $student['id'] ?>" class="btn btn-info mx-1">Ver</a>
-                            <a href="#editAlumnoModal" class="btn btn-primary mx-1" data-toggle="modal">Editar</a>
-                            <a href="#deleteAlumnoModal" class="btn btn-danger mx-1" data-toggle="modal">Eliminar</a>
+                            <a href="#editAlumnoModal" class="btn btn-primary mx-1" data-toggle="modal" onclick="fillEditForm(<?= htmlspecialchars(json_encode($student)) ?>)">Editar</a>
+                            <a href="#deleteAlumnoModal" class="btn btn-danger mx-1" data-toggle="modal" onclick="setStudentIdToDelete(<?= $student['id'] ?>)">Eliminar</a>
+
                           </div>
                         </td>
                       </tr>
@@ -114,28 +115,28 @@ $students = $studentsController->get();
               <form method="POST" action="<?= BASE_PATH . '/App/StudentsController.php'; ?>">
                 <div class="form-group">
                   <label>Nombre</label>
-                  <input type="text" class="form-control" required name="name" placeholder="Nombre" >
+                  <input type="text" class="form-control" required name="name" placeholder="Nombre">
                 </div>
                 <div class="form-group">
                   <label>Apellidos</label>
-                  <input type="text" class="form-control" required name="lastname" placeholder="Apellidos"   >
+                  <input type="text" class="form-control" required name="lastname" placeholder="Apellidos">
                 </div>
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control" required name="email" placeholder="Email"  >
+                  <input type="email" class="form-control" required name="email" placeholder="Email">
                 </div>
                 <div class="form-group">
                   <label>Semestre</label>
                   <select class="form-control" required name="semester">
-                  <option value="PRIMER">PRIMER</option>
-                  <option value="SEGUNDO">SEGUNDO</option>
-                  <option value="TERCER">TERCER</option>
-                  <option value="CUARTO">CUARTO</option>
-                  <option value="QUINTO">QUINTO</option>
-                  <option value="SEXTO">SEXTO</option>
-                  <option value="SETIMO">SETIMO</option>
-                  <option value="OCTAVO">OCTAVO</option>
-                  <option value="NOVENO">NOVENO</option>
+                    <option value="PRIMER">PRIMER</option>
+                    <option value="SEGUNDO">SEGUNDO</option>
+                    <option value="TERCER">TERCER</option>
+                    <option value="CUARTO">CUARTO</option>
+                    <option value="QUINTO">QUINTO</option>
+                    <option value="SEXTO">SEXTO</option>
+                    <option value="SETIMO">SETIMO</option>
+                    <option value="OCTAVO">OCTAVO</option>
+                    <option value="NOVENO">NOVENO</option>
                   </select>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
@@ -160,29 +161,35 @@ $students = $studentsController->get();
             <div class="modal-body">
               <form method="POST" action="<?= BASE_PATH . '/App/StudentsController.php'; ?>">
                 <div class="form-group">
+
+                <input type="hidden" name="userId" id="studentIdToEdit">
+
+                </div>
+
+                <div class="form-group">
                   <label>Nombre</label>
                   <input type="text" class="form-control" required name="name" placeholder="Nombre">
                 </div>
                 <div class="form-group">
                   <label>Apellidos</label>
-                  <input type="text" class="form-control" required name="lastname" placeholder="Apellidos">
+                  <input type="text" class="form-control" required name="lastName" placeholder="Apellidos">
                 </div>
                 <div class="form-group">
                   <label>Email</label>
                   <input type="email" class="form-control" required name="email" placeholder="Email">
                 </div>
                 <div class="form-group">
-                 <label>Semestre</label>
+                  <label>Semestre</label>
                   <select class="form-control" required name="semester">
-                  <option value="PRIMER">PRIMER</option>
-                  <option value="SEGUNDO">SEGUNDO</option>
-                  <option value="TERCER">TERCER</option>
-                  <option value="CUARTO">CUARTO</option>
-                  <option value="QUINTO">QUINTO</option>
-                  <option value="SEXTO">SEXTO</option>
-                  <option value="SETIMO">SETIMO</option>
-                  <option value="OCTAVO">OCTAVO</option>
-                  <option value="NOVENO">NOVENO</option>
+                    <option value="PRIMER">PRIMER</option>
+                    <option value="SEGUNDO">SEGUNDO</option>
+                    <option value="TERCER">TERCER</option>
+                    <option value="CUARTO">CUARTO</option>
+                    <option value="QUINTO">QUINTO</option>
+                    <option value="SEXTO">SEXTO</option>
+                    <option value="SETIMO">SETIMO</option>
+                    <option value="OCTAVO">OCTAVO</option>
+                    <option value="NOVENO">NOVENO</option>
                   </select>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
@@ -197,46 +204,88 @@ $students = $studentsController->get();
       </div>
 
 
-      <!-- Modal para Eliminar Alumno -->
-      <div id="deleteAlumnoModal" class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Eliminar Alumno</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-              <p>¿Estás seguro de que deseas eliminar este Alumno?</p>
-              <p class="text-warning"><small>Esta acción no se puede deshacer.</small></p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button onclick="removeStudent(<?=$studentsId?>)" type="button" class="btn btn-danger">Eliminar</button>
-            </div>
+
+    </div>
+    <div class="d-flex justify-content-between mt-4">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Actualizar</button>
+    </div>
+    <input type="hidden" name="action" value="updateStudent">
+    </form>
+
+    <!-- Modal para Eliminar Alumno -->
+    <div id="deleteAlumnoModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Eliminar Alumno</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar este Alumno?</p>
+            <p class="text-warning"><small>Esta acción no se puede deshacer.</small></p>
+          </div>
+          <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+
+
+            <form id="deleteStudentForm" method="POST" action="<?= BASE_PATH . '/App/StudentsController.php'; ?>">
+              <input type="hidden" name="user_id" id="studentIdToDelete">
+              <input type="hidden" name="action" value="removeStudent">
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
           </div>
         </div>
       </div>
-
-      <!-- Scripts -->
-      <script src="../Assets/js/jquery-3.3.1.slim.min.js"></script>
-      <script src="../Assets/js/popper.min.js"></script>
-      <script src="../Assets/js/bootstrap-1.min.js"></script>
-      <script src="../Assets/js/jquery-3.3.1.min.js"></script>
-      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-      <script type="text/javascript">
-        $(document).ready(function() {
-          $(".xp-menubar").on('click', function() {
-            $('#sidebar').toggleClass('active');
-            $('#content').toggleClass('active');
-          });
-
-          $(".xp-menubar, .body-overlay").on('click', function() {
-            $('#sidebar, .body-overlay').toggleClass('show-nav');
-          });
-        });
-      </script>
     </div>
+
+    <!-- Scripts -->
+    <script src="../Assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../Assets/js/popper.min.js"></script>
+    <script src="../Assets/js/bootstrap-1.min.js"></script>
+    <script src="../Assets/js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(".xp-menubar").on('click', function() {
+          $('#sidebar').toggleClass('active');
+          $('#content').toggleClass('active');
+        });
+
+        $(".xp-menubar, .body-overlay").on('click', function() {
+          $('#sidebar, .body-overlay').toggleClass('show-nav');
+        });
+      });
+
+
+      function fillEditForm(student) {
+        // Rellena los campos del formulario con los datos del alumno
+        document.getElementById('studentIdToEdit').value = student.id;
+        document.querySelector('#editAlumnoModal input[name="name"]').value = student.name;
+        document.querySelector('#editAlumnoModal input[name="lastName"]').value = student.lastName;
+        document.querySelector('#editAlumnoModal input[name="email"]').value = student.email;
+        document.querySelector('#editAlumnoModal select[name="semester"]').value = student.semester;
+
+        
+
+        console.log(student);
+
+      }
+
+
+
+
+      function setStudentIdToDelete(studentId) {
+        document.getElementById('studentIdToDelete').value = studentId;
+
+      }
+    </script>
+  </div>
   </div>
 </body>
 

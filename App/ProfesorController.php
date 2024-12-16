@@ -17,14 +17,14 @@ if (isset($_POST['action'])) {
             $name = $_POST['name'];
             $lastname = $_POST['lastName'];
             $email = $_POST['email'];
-         //   $password = $_POST['password'];
+            //   $password = $_POST['password'];
             $profesorcontroller = new ProfesorController();
             $profesorcontroller->addProfesor($name, $lastname, $email);
             break;
 
 
         case 'removeProfesor':
-            $profesorId = $_POST;
+            $profesorId = $_POST['profesorId'];
             $profesorcontroller = new ProfesorController();
             $profesorcontroller->removeProfesor($profesorId);
             break;
@@ -33,9 +33,9 @@ if (isset($_POST['action'])) {
         case 'updateProfesor':
             $profesorId = $_POST['profesorId'];
             $name = $_POST['name'];
-            $lastname = $_POST['lastname'];
+            $lastname = $_POST['lastName'];
             $email = $_POST['email'];
-     //       $password = $_POST['password'];
+            //       $password = $_POST['password'];
             $profesorcontroller = new ProfesorController();
             $profesorcontroller->editProfesor($profesorId, $name, $lastname, $email);
             break;
@@ -90,19 +90,19 @@ class ProfesorController
         ));
 
         $response = curl_exec($curl);
-        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
-       // list($header, $body) = explode("\r\n\r\n", $response, 2);
+        // list($header, $body) = explode("\r\n\r\n", $response, 2);
         //$responseData = json_decode($body, true);
-        
-        
-        if ($httpCode == 201) {
-        
-            header('Location: ' . BASE_PATH . 'profesores/mostrar');
-        return json_decode($response, true);}
-        else{
 
-        //    return json_decode($responseData);
+
+        if ($httpCode == 201) {
+
+            header('Location: ' . BASE_PATH . 'profesores/mostrar');
+            return json_decode($response, true);
+        } else {
+
+            //    return json_decode($responseData);
             header('Location: ' . BASE_PATH . '/profesores/mostrar?error=error');
         }
     }
@@ -113,6 +113,14 @@ class ProfesorController
     {
         $curl = curl_init();
 
+        
+        $data = json_encode([
+            'name' => $name,
+            'lastName' => $lastname,
+            'email' => $email,
+            'password' => 'hola123', 
+        ]);
+
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/profesors/' . $profesorId,
             CURLOPT_RETURNTRANSFER => true,
@@ -122,26 +130,27 @@ class ProfesorController
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'PUT',
-            CURLOPT_POSTFIELDS => array('name' => $name, 'lastName' => $lastname, 'email' => $email, 'password' => 'hola123'),
+            CURLOPT_POSTFIELDS => $data, 
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json', 
+                'Accept: application/json',       
+            ),
         ));
 
         $response = curl_exec($curl);
-        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
-       // list($header, $body) = explode("\r\n\r\n", $response, 2);
-        //$responseData = json_decode($body, true);
-        
-        
-        if ($httpCode == 201) {
-        
-            header('Location: ' . BASE_PATH . 'profesores/mostrar');
-        return json_decode($response, true);}
-        else{
 
-        //    return json_decode($responseData);
-            header('Location: ' . BASE_PATH . '/profesores/mostrar?error=error');
+        // Manejar la respuesta
+        if ($httpCode == 200 || $httpCode == 204) {
+            header('Location: ' . BASE_PATH . 'profesores/mostrar');
+            exit;
+        } else {
+            header('Location: ' . BASE_PATH . 'profesores/mostrar?error=error');
+            exit;
         }
     }
+
 
     public function removeProfesor($profesorId)
     {
@@ -149,7 +158,7 @@ class ProfesorController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/profesors/'.$profesorId,
+            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/profesors/' . $profesorId,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -160,10 +169,21 @@ class ProfesorController
         ));
 
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
-     //   echo $response;
-        return json_decode($response, true);
+       // list($header, $body) = explode("\r\n\r\n", $response, 2);
+        //$responseData = json_decode($body, true);
+        
+        
+        if ($httpCode == 200) {
+        
+            header('Location: ' . BASE_PATH . 'profesores/mostrar');
+        return json_decode($response, true);}
+        else{
+
+        //    return json_decode($responseData);
+            header('Location: ' . BASE_PATH . 'profesores/mostrar?error=error');
+        }
     }
 
 
@@ -171,7 +191,7 @@ class ProfesorController
     public function getProfesorByID($profesorId)
     {
         $curl = curl_init();
-    
+
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/profesors/' . $profesorId,
             CURLOPT_RETURNTRANSFER => true,
@@ -182,24 +202,24 @@ class ProfesorController
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
         ));
-    
+
         $response = curl_exec($curl);
         curl_close($curl);
-    
+
         if (!$response) {
             echo "No se recibió respuesta de la API. La URL podría ser incorrecta o el servidor podría estar caído.";
             exit;
         }
-    
-        // Decodificar la respuesta JSON
+
+
         $data = json_decode($response, true);
-    
-        // Verificar si la respuesta contiene la clave 'data'
+
+
         if (isset($data['data'])) {
-            // Si contiene los datos del profesor, devolverlos
+
             return $data['data'];
         } else {
-            // Si no contiene la clave 'data', mostrar un mensaje de error
+
             echo "No se encontró el profesor con ID: " . $profesorId;
             exit;
         }

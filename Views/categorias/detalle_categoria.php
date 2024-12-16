@@ -1,18 +1,30 @@
 <?php
   require '../../App/Config.php';
   require_once '../../App/CategoryController.php';
-
-
+  require_once '../../App/CoursesController.php';
+  require_once '../../App/ProfesorController.php';
   // Verificar si el parámetro 'id' está presente en la URL
   if (isset($_GET['id'])) {
     $categoryId = $_GET['id'];
 
     // Crear una instancia del categoryController
     $categoryController = new CategoryController();
-
+    $coursescontroller = new coursesController();
+    $profesorController = new ProfesorController();
     // Obtener los datos de la categoria usando el ID
     $category = $categoryController->getCategoryByID($categoryId);
-  } else {
+    $cursosC = $coursescontroller->getCourseByCategory($categoryId);
+
+
+
+    if (isset($cursosC['data']) && is_array($cursosC['data'])) {
+      foreach ($cursosC['data'] as &$course) {
+          $profesor = $profesorController->getProfesorByID($course['profesor_id']);
+          $course['profesor_name'] = $profesor['name'] ?? 'Desconocido'; // Si no se encuentra el nombre, usa "Desconocido"
+      }
+  }
+} 
+   else {
     echo "ID de la categoria no proporcionado.";
     exit; // Detener la ejecución si no se encuentra el 'id'
   }
@@ -88,13 +100,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
+                <?php if (isset($cursosC['data']) && is_array($cursosC['data']) && count($cursosC['data'])): ?>
+                  <?php foreach ($cursosC['data'] as $course): ?>
+                    <tr>
+                      <td><?= $course['id'] ?></td>
+                      <td><?= $course['name'] ?></td>
+                      <td><?= $course['description'] ?></td>
+                      <td><?= $course['profesor_name'] ?></td>
+                    </tr>
+
+
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <tr>
+                    <td colspan="6">No hay cursos disponibles.</td>
+                  </tr>
+                <?php endif; ?>
+
+              </tbody>
                 </table>
             </div>
           </div>

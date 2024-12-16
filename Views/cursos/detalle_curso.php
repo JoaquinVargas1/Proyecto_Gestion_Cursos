@@ -1,6 +1,40 @@
 <?php
-  require '../../App/Config.php';
+require '../../App/Config.php';
+require_once '../../App/CoursesController.php';
+require_once '../../App/ProfesorController.php'; 
+require_once '../../App/CategoryController.php'; 
+
+// Verificar si el parámetro 'id' está presente en la URL
+if (isset($_GET['id'])) {
+    $courseId = $_GET['id'];
+
+    
+    $coursesController = new CoursesController();
+    $profesorController = new ProfesorController();
+    $categoryController = new CategoryController();
+    // Obtener los datos del curso usando su ID
+    $course = $coursesController->getCourseByID($courseId);
+
+    if (!$course || !isset($course['data'])) {
+        echo "No se encontró el curso con ID: " . $courseId;
+        exit;
+    }
+
+    
+    $courseData = $course['data'];
+
+    
+    $profesor = $profesorController->getProfesorByID($courseData['profesor_id']);
+    $profesorName = $profesor['name'] ?? 'Desconocido';
+
+    $category = $categoryController->getCategoryByID($courseData['category_id']);
+    $categoryName = $category['name']?? 'Desconocido';
+} else {
+    echo "ID del curso no proporcionado.";
+    exit;
+}
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -54,41 +88,32 @@
 
 
 
-              <!-- Tarjeta de Información del Curso -->
-              <div class="card mb-4">
+               <!-- Tarjeta de Información del Curso -->
+               <div class="card mb-4">
                 <div class="card-body">
                   <div class="mb-3">
                     <h5>Nombre</h5>
-                    <p id="descripcionCurso" class="text-muted">Matemáticas aplicadas</p>
+                    <p id="nombreCurso" class="text-muted"><?= htmlspecialchars($courseData['name'] ?? 'Sin nombre') ?></p>
                   </div>
                   <div class="mb-3">
                     <h5>Descripción</h5>
-                    <p id="descripcionCurso" class="text-muted">Curso avanzado de matemáticas aplicadas</p>
+                    <p id="descripcionCurso" class="text-muted"><?= htmlspecialchars($courseData['description'] ?? 'Sin descripción') ?></p>
                   </div>
                   <div class="mb-3">
                     <h5>Docente</h5>
-                    <p id="docenteCurso" class="text-muted">Arturo Villegas</p>
+                    <p id="docenteCurso" class="text-muted"><?= htmlspecialchars($profesorName) ?></p>
                   </div>
                   <div>
                     <h5>Categoría</h5>
-                    <p id="categoriaCurso" class="text-muted">Ciencias</p>
+                    <p id="categoriaCurso" class="text-muted"><?= htmlspecialchars($category['name'] ?? 'Sin categoría') ?></p>
                   </div>
                 </div>
               </div>
+            
+          
 
 
-              <!-- Tarjeta de Unidades y Contenido -->
-              <div class="card">
-                <div class="card-body">
-                  <h3 class="card-title text-center">Unidades y Contenido</h3>
-                  <ul id="unidadesContenido" class="list-group list-group-flush">
-                    <li class="list-group-item">Unidad 1: Álgebra avanzada</li>
-                    <li class="list-group-item">Unidad 2: Cálculo diferencial</li>
-                    <li class="list-group-item">Unidad 3: Teoría de números</li>
-                    <li class="list-group-item">Unidad 4: Estadística aplicada</li>
-                  </ul>
-                </div>
-              </div>
+
 
 
             </div>

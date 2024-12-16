@@ -1,10 +1,9 @@
 
 <?php
 
-if (!isset($_SESSION)) {
-    session_start();
-}
-
+ob_start();
+require_once 'Config.php';
+ob_end_clean();
 
 
 
@@ -33,12 +32,10 @@ if (isset($_POST['action'])) {
 
         case 'updateInscription':
             $courseId = $_POST['courseId'];
-            $name = $_POST['name'];
-            $description = $_POST['description'];
-            $category_id = $_POST['category_id'];
-            $profesorId = $_POST['profesorId'];
+            $user_id = $_POST['user_id'];
+            $course_id = $_POST['course_id'];
             $inscriptioncontroller = new InscriptionsController();
-            $inscriptioncontroller->updateInscription($courseId, $name, $description, $category_id, $profesorId);
+            $inscriptioncontroller->updateInscription($courseId, $name, $category_id, $profesorId);
             break;
     }
 }
@@ -93,10 +90,21 @@ class InscriptionsController
         ));
 
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
-     //   echo $response;
-        return json_decode($response, true);
+       // list($header, $body) = explode("\r\n\r\n", $response, 2);
+        //$responseData = json_decode($body, true);
+        
+        
+        if ($httpCode == 201) {
+        
+            header('Location: ' . BASE_PATH . 'cursos/alumnos_inscritos');
+        return json_decode($response, true);}
+        else{
+
+        //    return json_decode($responseData);
+            header('Location: ' . BASE_PATH . 'cursos/alumnos_inscritos?error=error');
+        }
     }
 
 

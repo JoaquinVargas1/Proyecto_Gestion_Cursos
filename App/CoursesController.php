@@ -22,9 +22,9 @@ if (isset($_POST['action'])) {
 
 
         case 'removeCourse':
-            $profesorId = $_POST;
+            $courseId = $_POST['courseId'];
             $coursescontroller = new CoursesController();
-            $coursescontroller->removeCourse($profesorId);
+            $coursescontroller->removeCourse($courseId);
             break;
 
 
@@ -109,35 +109,47 @@ class CoursesController
 
 
     public function editCourse($courseId, $name, $description, $category_id, $profesorId)
-    {
+{
+    $curl = curl_init();
 
-        $curl = curl_init();
+    // Crear el cuerpo de la solicitud en formato JSON
+    $data = json_encode([
+        'name' => $name,
+        'description' => $description,
+        'category_id' => $category_id,
+        'profesor_id' => $profesorId,
+    ]);
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/courses/' . $courseId,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'PUT',
-            CURLOPT_POSTFIELDS => array('name' => $name, 'description' => $description, 'category_id' => $category_id, 'profesor_id' => $profesorId),
-        ));
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api-proyecto-96t3.onrender.com/api/courses/' . $courseId,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'PUT',
+        CURLOPT_POSTFIELDS => $data, // Enviar datos como JSON
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json', // Especificar que los datos son JSON
+            'Accept: application/json',       // Aceptar respuesta en formato JSON
+        ),
+    ));
 
-        $response = curl_exec($curl);
-        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
-        curl_close($curl);
+    $response = curl_exec($curl);
+    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
 
-        if ($httpCode == 201) {
-        
-            header('Location: ' . BASE_PATH . 'cursos/mostrar');
-        return json_decode($response, true);}
-        else{
-
-            header('Location: ' . BASE_PATH . 'cursos/mostrar?error=error');
-        }
+    // Manejar la respuesta
+    if ($httpCode == 200 || $httpCode == 204) {
+        header('Location: ' . BASE_PATH . 'cursos/mostrar');
+        exit;
+    } else {
+        header('Location: ' . BASE_PATH . 'cursos/mostrar?error=error');
+        exit;
     }
+}
+
 
 
     public function removeCourse($courseId)
@@ -157,10 +169,21 @@ class CoursesController
         ));
 
         $response = curl_exec($curl);
-
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); 
         curl_close($curl);
+       // list($header, $body) = explode("\r\n\r\n", $response, 2);
+        //$responseData = json_decode($body, true);
+        
+        
+        if ($httpCode == 200) {
+        
+            header('Location: ' . BASE_PATH . 'cursos/mostrar');
+        return json_decode($response, true);}
+        else{
 
-        return json_decode($response, true);
+        //    return json_decode($responseData);
+            header('Location: ' . BASE_PATH . 'cursos/mostrar?error=error');
+        }
     }
 
 
